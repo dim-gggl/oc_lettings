@@ -2,11 +2,9 @@
 Profile model previously implemented in the oc_lettings_site application.
 
 Classes:
+    User: Default Django User model.
     Profile: Profile model based on the default Django User model.
 """
-from django.db import models
-from django.contrib.auth.models import User
-
 from django.db import models
 from django.contrib.auth.models import User
 
