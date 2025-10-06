@@ -1,3 +1,9 @@
+"""
+WSGI entrypoint.
+
+Exposes callable 'application' for WSGI servers.
+"""
+
 import os
 
 from django.core.wsgi import get_wsgi_application

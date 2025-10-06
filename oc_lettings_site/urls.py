@@ -1,3 +1,5 @@
+"""Root URL configuration to views."""
+
 from django.contrib import admin
 from django.urls import path
 import lettings.views as lettings_views

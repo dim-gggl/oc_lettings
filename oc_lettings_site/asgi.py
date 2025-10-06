@@ -1,3 +1,9 @@
+"""
+ASGI entrypoint.
+
+Exposes the callable 'application' for ASGI servers.
+"""
+
 import os
 
 from django.core.asgi import get_asgi_application

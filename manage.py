@@ -1,9 +1,25 @@
+"""
+Django management command to run the application.
+
+Function:
+    main: Run the application.
+
+Exceptions:
+    ImportError: If Django is not installed.
+"""
+
 import os
 import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oc_lettings_site.settings')
+    """
+    Run the application.
+    """
+    os.environ.setdefault(
+        'DJANGO_SETTINGS_MODULE',
+        'oc_lettings_site.settings',
+    )
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
