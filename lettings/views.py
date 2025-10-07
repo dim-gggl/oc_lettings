@@ -9,6 +9,7 @@ Functions:
 from django.shortcuts import render
 from .models import Letting
 
+
 # Create your views here.
 def lettings_index(request):
     """
@@ -17,6 +18,7 @@ def lettings_index(request):
     lettings_list = Letting.objects.all()
     context = {'lettings_list': lettings_list}
     return render(request, 'lettings/lettings_index.html', context)
+
 
 def letting(request, letting_id):
     """

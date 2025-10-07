@@ -2,8 +2,6 @@ import pytest
 
 from django.core.exceptions import ValidationError
 
-from lettings.models import Address, Letting
-
 
 @pytest.mark.django_db
 def test_address_str_returns_number_and_street(make_address):
@@ -15,9 +13,9 @@ def test_address_str_returns_number_and_street(make_address):
 
 
 @pytest.mark.django_db
-def test_address_field_validators_enforced():
+def test_address_field_validators_enforced(make_address):
     """Test that the address field validators are enforced."""
-    address = Address(
+    address = make_address(
         number=100000,  # invalid (> 9999)
         street="S",
         city="",

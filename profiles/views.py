@@ -18,6 +18,7 @@ def profiles_index(request):
     context = {'profiles_list': profiles_list}
     return render(request, 'profiles/profiles_index.html', context)
 
+
 def profile(request, username):
     """
     View to display a profile's details.
