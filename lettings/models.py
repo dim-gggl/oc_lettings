@@ -21,7 +21,8 @@ class Address(models.Model):
         city: CharField to store the city of the address.
         state: CharField to store the state of the address.
         zip_code: PositiveIntegerField to store the zip code of the address.
-        country_iso_code: CharField to store the country ISO code of the address.
+        country_iso_code: CharField to store the country ISO code of the 
+            address.
 
     Methods:
         __str__: Returns the number and street of the address.

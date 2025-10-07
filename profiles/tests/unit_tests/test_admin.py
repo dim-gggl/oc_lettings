@@ -7,6 +7,5 @@ from profiles.models import Profile
 
 @pytest.mark.django_db
 def test_profile_is_registered_in_admin_site():
+    """Test that the profile is registered in the admin site."""
     assert Profile in admin.site._registry
-
-

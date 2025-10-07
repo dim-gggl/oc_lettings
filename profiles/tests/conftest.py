@@ -6,7 +6,7 @@ from profiles.models import Profile
 @pytest.fixture
 def make_user(django_user_model):
     """Factory to create a Django user with sensible defaults."""
-    def _make_user(username="user", password="password123", **kwargs):
+    def _make_user(username="user_test", password="password123", **kwargs):
         defaults = {
             "username": username,
             "password": password,
@@ -23,10 +23,8 @@ def make_user(django_user_model):
 @pytest.fixture
 def make_profile(make_user):
     """Factory to create a Profile for a given username and favorite city."""
-    def _make_profile(username="user", favorite_city=""):
+    def _make_profile(username="user_test", favorite_city="Paris"):
         user = make_user(username=username)
         return Profile.objects.create(user=user, favorite_city=favorite_city)
 
     return _make_profile
-
-
