@@ -56,7 +56,7 @@ class Letting(models.Model):
         __str__: Returns the title of the letting.
     """
     title = models.CharField(max_length=256)
-    address = models.OneToOneField(Address, on_delete=models.CASCADE)
+    address = models.OneToOneField(to=Address, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
