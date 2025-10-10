@@ -11,13 +11,13 @@ from .models import Letting
 
 
 # Create your views here.
-def lettings_index(request):
+def index(request):
     """
     View to display the list of lettings.
     """
     lettings_list = Letting.objects.all()
     context = {'lettings_list': lettings_list}
-    return render(request, 'lettings/lettings_index.html', context)
+    return render(request, 'lettings/index.html', context)
 
 
 def letting(request, letting_id):
