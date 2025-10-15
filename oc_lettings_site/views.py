@@ -1,7 +1,6 @@
 """Home page and error handlers views."""
 
 from django.shortcuts import render
-from django.http import HttpResponseServerError, HttpResponseNotFound, HttpResponseBadRequest
 
 
 def index(request):
