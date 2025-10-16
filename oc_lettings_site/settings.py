@@ -1,5 +1,10 @@
 import os
+import django.db.models.signals
 import sentry_sdk
+import logging
+
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
@@ -9,26 +14,25 @@ load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+ENV_MODE = os.environ.get("ENV_MODE", "dev")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() in ("1", "true", "yes", "on")
+if ENV_MODE == "prod":
+    DEBUG = False
+else:
+    DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-if not SECRET_KEY:
-    if DEBUG:
-        # Development-only fallback key
-        SECRET_KEY = "a_very_strong_secret_key"
-    else:
-        raise ImproperlyConfigured("DJANGO_SECRET_KEY must be configured in environment")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "a_very_strong_secret_key")
+if SECRET_KEY == "a_very_strong_secret_key":
+    raise ImproperlyConfigured("DJANGO_SECRET_KEY must be configured in environment")
 
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+    ALLOWED_HOSTS = ["127.0.0.1,localhost", "oc-lettings-x670.onrender.com"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -139,6 +143,37 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static",]
 
+# Django logging configuration to ensure Sentry receives breadcrumbs and events
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {"format": "%(asctime)s %(levelname)s %(name)s %(message)s"},
+        "simple": {"format": "%(levelname)s %(name)s %(message)s"},
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+    },
+    "root": {
+        "level": "INFO",
+        "handlers": ["console"],
+    },
+    "loggers": {
+        # Django core logs
+        "django": {"level": "INFO", "handlers": ["console"], "propagate": True},
+        "django.server": {"level": "INFO", "handlers": ["console"], "propagate": True},
+        "django.request": {"level": "WARNING", "handlers": ["console"], "propagate": True},
+        "django.db.backends": {"level": "WARNING", "handlers": ["console"], "propagate": False},
+        # Project apps
+        "oc_lettings_site": {"level": "INFO", "handlers": ["console"], "propagate": True},
+        "lettings": {"level": "INFO", "handlers": ["console"], "propagate": True},
+        "profiles": {"level": "INFO", "handlers": ["console"], "propagate": True},
+    },
+}
+
 # Sentry
 sentry_dsn = os.environ.get("SENTRY_DSN")
 if sentry_dsn:
@@ -152,4 +187,22 @@ if sentry_dsn:
         # Set traces_sample_rate to 1.0 to capture 100%
         # of transactions for tracing.
         traces_sample_rate=1.0,
+        integrations=[
+            DjangoIntegration(
+                transaction_style='url',
+                middleware_spans=True,
+                signals_spans=True,
+                signals_denylist=[
+                    django.db.models.signals.pre_init,
+                    django.db.models.signals.post_init,
+                ],
+                cache_spans=False,
+                http_methods_to_capture=("GET",),
+            ),
+            LoggingIntegration(
+                level=logging.INFO,
+                event_level=logging.ERROR,
+                sentry_logs_level=logging.INFO,
+            ),
+        ],
     )

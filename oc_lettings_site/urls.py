@@ -11,6 +11,7 @@ urlpatterns = [
     path("lettings/", include("lettings.urls")),
     path("profiles/", include("profiles.urls")),
     path("admin/", admin.site.urls),
+    path("sentry-debug/", views.sentry_debug, name="sentry-debug"),
 ]
 
 # Custom error handlers (used when DEBUG=False)

@@ -45,3 +45,8 @@ def custom_500(request):
         A rendered response for the "500.html" template with 500 status.
     """
     return render(request, "500.html", status=500)
+
+
+def sentry_debug(request):
+    """Trigger a Sentry error for debugging."""
+    1 / 0
