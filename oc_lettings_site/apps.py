@@ -19,7 +19,8 @@ class OCLettingsSiteConfig(AppConfig):
         Globally adjust pluralization for model verbose names:
         - If Django would naively pluralize as '<name>s' (or no plural set),
           and the base ends with: s, x, z, ch, sh -> use 'es'.
-        - Special-case for '-z' to produce '<name>zes' (e.g., 'quiz' -> 'quizzes').
+        - Special-case for '-z' to produce '<name>zes'
+          (e.g., 'quiz' -> 'quizzes').
         """
         es_endings = ('s', 'x', 'ch', 'sh')  # endings that take 'es'
         for model in django_apps.get_models():
@@ -29,7 +30,8 @@ class OCLettingsSiteConfig(AppConfig):
                 continue
             plural = opts.verbose_name_plural
 
-            # Only override if not explicitly set and Django's naive plural would be '<base>s'
+            # Only override if not explicitly set and Django's naive plural
+            # would be '<base>s'
             if plural is None or str(plural) == f"{base}s":
                 if base.endswith('z'):
                     opts.verbose_name_plural = f"{base}zes"

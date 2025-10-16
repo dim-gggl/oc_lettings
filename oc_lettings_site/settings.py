@@ -26,13 +26,15 @@ else:
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "a_very_strong_secret_key")
-if SECRET_KEY == "a_very_strong_secret_key":
-    raise ImproperlyConfigured("DJANGO_SECRET_KEY must be configured in environment")
+if not DEBUG and SECRET_KEY == "a_very_strong_secret_key":
+    raise ImproperlyConfigured(
+        "DJANGO_SECRET_KEY must be configured in environment"
+    )
 
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ["127.0.0.1,localhost", "oc-lettings-x670.onrender.com"]
+    ALLOWED_HOSTS = ["127.0.0.1" , "localhost", "oc-lettings-x670.onrender.com"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -148,7 +150,9 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {"format": "%(asctime)s %(levelname)s %(name)s %(message)s"},
+        "verbose": {
+            "format": "%(asctime)s %(levelname)s %(name)s %(message)s"
+        },
         "simple": {"format": "%(levelname)s %(name)s %(message)s"},
     },
     "handlers": {
@@ -163,14 +167,42 @@ LOGGING = {
     },
     "loggers": {
         # Django core logs
-        "django": {"level": "INFO", "handlers": ["console"], "propagate": True},
-        "django.server": {"level": "INFO", "handlers": ["console"], "propagate": True},
-        "django.request": {"level": "WARNING", "handlers": ["console"], "propagate": True},
-        "django.db.backends": {"level": "WARNING", "handlers": ["console"], "propagate": False},
+        "django": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "django.server": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "django.request": {
+            "level": "WARNING",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "django.db.backends": {
+            "level": "WARNING",
+            "handlers": ["console"],
+            "propagate": False,
+        },
         # Project apps
-        "oc_lettings_site": {"level": "INFO", "handlers": ["console"], "propagate": True},
-        "lettings": {"level": "INFO", "handlers": ["console"], "propagate": True},
-        "profiles": {"level": "INFO", "handlers": ["console"], "propagate": True},
+        "oc_lettings_site": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "lettings": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "profiles": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": True,
+        },
     },
 }
 
@@ -180,7 +212,7 @@ if sentry_dsn:
     sentry_sdk.init(
         dsn=sentry_dsn,
         # Add data like request headers and IP for users,
-        # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
+        # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info # noqa: E501
         send_default_pii=True,
         # Enable sending logs to Sentry
         enable_logs=True,
