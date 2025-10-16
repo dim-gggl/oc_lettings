@@ -2,7 +2,7 @@ from django.urls import reverse, resolve
 from django.test import TestCase
 
 from lettings.models import Letting, Address
-from lettings.views import lettings_index, letting as letting_view
+from lettings.views import index, letting as letting_view
 
 
 class TestLettingsViews(TestCase):
@@ -13,9 +13,9 @@ class TestLettingsViews(TestCase):
         Test that the lettings index page is displayed and contains the
         correct content.
         """
-        response = self.client.get(reverse("lettings_index"))
+        response = self.client.get(reverse("lettings"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "lettings/lettings_index.html")
+        self.assertTemplateUsed(response, "lettings/index.html")
         self.assertContains(response, "Lettings")
         self.assertContains(response, "No lettings are available.")
 
@@ -39,7 +39,7 @@ class TestLettingsViews(TestCase):
         l1 = Letting.objects.create(title="Letting 1", address=addr1)
         l2 = Letting.objects.create(title="Letting 2", address=addr2)
 
-        response = self.client.get(reverse("lettings_index"))
+        response = self.client.get(reverse("lettings"))
         self.assertContains(
             response,
             "<ul class=\"list-group list-group-flush list-group-careers\">",
@@ -76,9 +76,9 @@ class TestLettingsViews(TestCase):
         Test that the lettings index URL is resolved to the lettings index
         view.
         """
-        url = reverse("lettings_index")
+        url = reverse("lettings")
         resolved = resolve(url)
-        self.assertEqual(resolved.func, lettings_index)
+        self.assertEqual(resolved.func, index)
 
     def test_reverse_and_resolve_letting(self):
         """

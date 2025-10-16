@@ -23,13 +23,12 @@ def test_lettings_index_context_contains_lettings_list(client):
     Letting.objects.create(title="Letting 1", address=addr1)
     Letting.objects.create(title="Letting 2", address=addr2)
 
-    response = client.get(reverse("lettings_index"))
+    response = client.get(reverse("lettings"))
 
     lettings_list = response.context["lettings_list"]
-    titles = {letting.title for letting in lettings_list}
-
     assert len(lettings_list) == 2
-    assert {"Letting 1", "Letting 2"}.issubset(titles)
+    assert str(lettings_list[0]) == "Letting 1"
+    assert str(lettings_list[1]) == "Letting 2"
 
 
 @pytest.mark.django_db

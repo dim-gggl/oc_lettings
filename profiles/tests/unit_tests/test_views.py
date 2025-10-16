@@ -5,7 +5,7 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 
 from profiles.models import Profile
-from profiles.views import profiles_index, profile as profile_view
+from profiles.views import index, profile as profile_view
 
 
 class TestViews(TestCase):
@@ -13,13 +13,13 @@ class TestViews(TestCase):
 
     def test_profiles_index_status_code_200(self):
         """Profiles index responds with HTTP 200."""
-        response = self.client.get(reverse("profiles_index"))
+        response = self.client.get(reverse("profiles"))
         self.assertEqual(response.status_code, 200)
 
     def test_profiles_index_template_used(self):
         """Profiles index uses the correct template."""
-        response = self.client.get(reverse("profiles_index"))
-        self.assertTemplateUsed(response, "profiles/profiles_index.html")
+        response = self.client.get(reverse("profiles"))
+        self.assertTemplateUsed(response, "profiles/index.html")
 
     @pytest.mark.django_db
     def test_profiles_index_displays_profiles_list(self):
@@ -29,7 +29,7 @@ class TestViews(TestCase):
         Profile.objects.create(user=user1, favorite_city="Paris")
         Profile.objects.create(user=user2, favorite_city="Lyon")
 
-        response = self.client.get(reverse("profiles_index"))
+        response = self.client.get(reverse("profiles"))
 
         self.assertContains(
             response,
@@ -49,7 +49,7 @@ class TestViews(TestCase):
 
     def test_profiles_index_empty_state_message(self):
         """Profiles index shows an empty state when no profiles exist."""
-        response = self.client.get(reverse("profiles_index"))
+        response = self.client.get(reverse("profiles"))
         self.assertContains(response, "No profiles are available.")
 
     @pytest.mark.django_db
@@ -74,12 +74,12 @@ class TestViews(TestCase):
 
     def test_reverse_and_resolve_profiles_index(self):
         """
-        Reverse/resolve for profiles_index points to the correct view
+        Reverse/resolve for profiles points to the correct view
         function.
         """
-        url = reverse("profiles_index")
+        url = reverse("profiles")
         resolved = resolve(url)
-        self.assertEqual(resolved.func, profiles_index)
+        self.assertEqual(resolved.func, index)
 
     def test_reverse_and_resolve_profile(self):
         """Reverse/resolve for profile points to the correct view function."""

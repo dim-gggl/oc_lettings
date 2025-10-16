@@ -9,13 +9,12 @@ def test_profiles_index_context_contains_profiles_list(client, make_profile):
     make_profile(username="jane", favorite_city="Paris")
     make_profile(username="john", favorite_city="Lyon")
 
-    response = client.get(reverse("profiles_index"))
+    response = client.get(reverse("profiles"))
 
     profiles_list = response.context["profiles_list"]
-    usernames = {p.user.username for p in profiles_list}
-
     assert len(profiles_list) == 2
-    assert {"jane", "john"}.issubset(usernames)
+    assert str(profiles_list[0]) == "jane"
+    assert str(profiles_list[1]) == "john"
 
 
 @pytest.mark.django_db
