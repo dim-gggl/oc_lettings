@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+# Trigger the workflow on all pushes (we will filter by branch in the jobs)
+on:
+  push:
+    branches: [main]
+jobs:
+  # Job 1: Linting with flake8
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'    # Python version (adapt if needed)
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run flake8
+        run: flake8
+
+  # Job 2: Unit tests + Coverage
+  tests:
+    runs-on: ubuntu-latest
+    needs: lint            # tests are only running if the lint is OK
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests with coverage
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}   # secret key necessary for tests (otherwise Django could crash)
+        run: |
+          coverage run -m pytest
+          coverage report -m --fail-under=80
+
+  # Job 3: Construct and push Docker image
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: tests
+    if: github.ref == 'refs/heads/master'    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/oc_lettings:latest,${{ secrets.DOCKER_USERNAME }}/oc_lettings:${{ github.sha }}
+
+  # Job 4: Deployment on Render
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push   # only deploy if the Docker image has been pushed
+    if: github.ref == 'refs/heads/main'    # only on the main branch
+    steps:
+      - name: Deploy on Render
+        uses: JorgeLNJunior/render-deploy@v1.4.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
+          wait_deploy: true
