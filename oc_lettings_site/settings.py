@@ -15,8 +15,6 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ENV_MODE = os.environ.get("ENV_MODE", "dev")
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV_MODE == "prod":
@@ -34,7 +32,11 @@ if not DEBUG and SECRET_KEY == "a_very_strong_secret_key":
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ["127.0.0.1" , "localhost", "oc-lettings-x670.onrender.com"]
+    ALLOWED_HOSTS = [
+        "127.0.0.1",
+        "localhost",
+        "oc-lettings-x670.onrender.com",
+    ]
 
 # Application definition
 INSTALLED_APPS = [
