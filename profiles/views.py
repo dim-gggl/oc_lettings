@@ -8,8 +8,8 @@ Functions:
 
 from django.shortcuts import render
 from django.db import DatabaseError
-from django.http import HttpResponse, HttpResponseNotFound
-from django.template import TemplateDoesNotExist, TemplateSyntaxError
+from django.http import Http404
+from django.template import TemplateSyntaxError, TemplateDoesNotExist
 import logging
 from .models import Profile
 
@@ -26,10 +26,7 @@ def index(request):
         logger.error("DB error while listing profiles",
                      extra={"path": request.path},
                      exc_info=True)
-        return HttpResponse(
-            "Service temporarily unavailable",
-            status=503
-        )
+        raise
 
     context = {"profiles_list": profiles_list}
     try:
@@ -38,7 +35,7 @@ def index(request):
         logger.error("Template error for profiles/index",
                      extra={"template": "profiles/index.html"},
                      exc_info=True)
-        return HttpResponse("Template error", status=500)
+        raise
 
 
 def profile(request, username):
@@ -54,18 +51,12 @@ def profile(request, username):
                         "path": request.path
                        },
                        exc_info=True)
-        return HttpResponseNotFound("Profile not found")
-    except Profile.MultipleObjectsReturned:
-        logger.error("Multiple profiles returned",
-                     extra={"username": username},
-                     exc_info=True)
-        return HttpResponse("Unexpected multiple results", status=500)
+        raise Http404("Profile not found")
     except DatabaseError:
-        logger.error("DB error while fetching profile",
+        logger.error("Database error while fetching profile",
                      extra={"username": username},
                      exc_info=True)
-        return HttpResponse("Service temporarily unavailable",
-                            status=503)
+        raise
 
     context = {"profile": profile}
     try:
@@ -77,4 +68,4 @@ def profile(request, username):
                         "username": username
                      },
                      exc_info=True)
-        return HttpResponse("Template error", status=500)
+        raise

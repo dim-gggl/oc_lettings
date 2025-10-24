@@ -66,3 +66,4 @@ push:
 # Clean local image
 clean:
 	docker rmi $(IMAGE_NAME):$(TAG) || true
+         

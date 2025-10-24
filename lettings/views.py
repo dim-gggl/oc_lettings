@@ -10,7 +10,7 @@ import logging
 from django.shortcuts import render
 from django.template import TemplateDoesNotExist, TemplateSyntaxError
 from django.db import DatabaseError
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import Http404, HttpResponse
 from .models import Letting
 
 logger = logging.getLogger(__name__)
@@ -24,7 +24,7 @@ def index(request):
         lettings_list = Letting.objects.all()
     except DatabaseError as e:
         logger.error(f"Database error: {e}")
-        return HttpResponse("Service temporarily unavailable", status=500)
+        raise
 
     context = {'lettings_list': lettings_list}
     try:
@@ -33,7 +33,7 @@ def index(request):
         logger.error("Template error for lettings/index",
                      extra={"template": "lettings/index.html"},
                      exc_info=True)
-        return HttpResponse("Template error", status=500)
+        raise
 
 
 def letting(request, letting_id):
@@ -43,18 +43,17 @@ def letting(request, letting_id):
     except Letting.DoesNotExist:
         logger.warning("Letting not found",
                        extra={"letting_id": letting_id, "path": request.path})
-        return HttpResponseNotFound("Letting not found")
+        raise Http404
     except Letting.MultipleObjectsReturned:
         logger.error("Multiple lettings returned",
                      extra={"letting_id": letting_id},
                      exc_info=True)
-        return HttpResponse("Unexpected multiple results",
-                            status=500)
+        raise
     except DatabaseError:
         logger.error("DB error while fetching letting",
                      extra={"letting_id": letting_id},
                      exc_info=True)
-        return HttpResponse("Service temporarily unavailable", status=503)
+        raise
 
     context = {"title": letting.title, "address": letting.address}
     try:
@@ -68,4 +67,4 @@ def letting(request, letting_id):
             },
             exc_info=True
         )
-        return HttpResponse("Template error", status=500)
+        raise
