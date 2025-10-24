@@ -10,7 +10,7 @@ import logging
 from django.shortcuts import render
 from django.template import TemplateDoesNotExist, TemplateSyntaxError
 from django.db import DatabaseError
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from .models import Letting
 
 logger = logging.getLogger(__name__)
