@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Clinkey &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/clinkey.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deployment &amp; Ops" href="deployment_ops.html" />
+    <link rel="prev" title="Orange County Lettings - Tests and Coverage" href="tests_and_coverage.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="deployment_ops.html" title="Deployment &amp; Ops"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tests_and_coverage.html" title="Orange County Lettings - Tests and Coverage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="development.html" accesskey="U">Development</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Clinkey</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-clinkey">
+<h1>Orange County Lettings - Clinkey<a class="headerlink" href="#orange-county-lettings-clinkey" title="Link to this heading">¶</a></h1>
+<p>This page explains how to generate strong secrets and passwords using Clinkey.</p>
+<section id="web-interface">
+<h2>Web interface<a class="headerlink" href="#web-interface" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Visit the Clinkey web UI: <code class="docutils literal notranslate"><span class="pre">https://dim-gggl.github.io/Clinkey/</span></code></p></li>
+</ul>
+</section>
+<section id="command-line-interface">
+<h2>Command-line interface<a class="headerlink" href="#command-line-interface" title="Link to this heading">¶</a></h2>
+<p>Install via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>clinkey-cli
+</pre></div>
+</div>
+<p>Or via Homebrew tap:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>tap<span class="w"> </span>dim-gggl/homebrew
+brew<span class="w"> </span>install<span class="w"> </span>clinkey
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<p>Generate a strong Django secret key and export it as an environment variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="k">$(</span>clinkey<span class="w"> </span>-t<span class="w"> </span>super_strong<span class="w"> </span>-l<span class="w"> </span><span class="m">64</span><span class="w"> </span>-s<span class="w"> </span>-<span class="w"> </span>--lower<span class="k">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>For production, store the generated secret in a secure secret manager (e.g., GitHub Actions secrets, Render environment variables), not in source control.</p></li>
+<li><p>You can also generate other credentials (DB passwords, API keys) with appropriate templates and options.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Clinkey</a><ul>
+<li><a class="reference internal" href="#web-interface">Web interface</a></li>
+<li><a class="reference internal" href="#command-line-interface">Command-line interface</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#tips">Tips</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="development.html">Development</a><ul>
+      <li>Previous: <a href="tests_and_coverage.html" title="previous chapter">Orange County Lettings - Tests and Coverage</a></li>
+      <li>Next: <a href="deployment_ops.html" title="next chapter">Deployment &amp; Ops</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/clinkey.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>

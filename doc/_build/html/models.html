@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Models &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/models.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Orange County Lettings - Views" href="views.html" />
+    <link rel="prev" title="Orange County Lettings - Architecture" href="architecture.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="views.html" title="Orange County Lettings - Views"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="architecture.html" title="Orange County Lettings - Architecture"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="reference.html" accesskey="U">Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Models</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-models">
+<h1>Orange County Lettings - Models<a class="headerlink" href="#orange-county-lettings-models" title="Link to this heading">¶</a></h1>
+<p>This page documents the data models used by the project and explains the pluralization behavior.</p>
+<section id="lettings-app">
+<h2>Lettings app<a class="headerlink" href="#lettings-app" title="Link to this heading">¶</a></h2>
+<section id="address">
+<h3>Address<a class="headerlink" href="#address" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fields:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: <code class="docutils literal notranslate"><span class="pre">PositiveIntegerField</span></code> (max 9999)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">street</span></code>: <code class="docutils literal notranslate"><span class="pre">CharField(64)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">city</span></code>: <code class="docutils literal notranslate"><span class="pre">CharField(64)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: <code class="docutils literal notranslate"><span class="pre">CharField(2)</span></code> with <code class="docutils literal notranslate"><span class="pre">MinLengthValidator(2)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zip_code</span></code>: <code class="docutils literal notranslate"><span class="pre">PositiveIntegerField</span></code> (max 99999)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">country_iso_code</span></code>: <code class="docutils literal notranslate"><span class="pre">CharField(3)</span></code> with <code class="docutils literal notranslate"><span class="pre">MinLengthValidator(3)</span></code></p></li>
+</ul>
+</li>
+<li><p>String representation: <code class="docutils literal notranslate"><span class="pre">&quot;&lt;number&gt;</span> <span class="pre">&lt;street&gt;&quot;</span></code></p></li>
+</ul>
+</section>
+<section id="letting">
+<h3>Letting<a class="headerlink" href="#letting" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fields:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: <code class="docutils literal notranslate"><span class="pre">CharField(256)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">address</span></code>: <code class="docutils literal notranslate"><span class="pre">OneToOneField(Address,</span> <span class="pre">on_delete=CASCADE)</span></code></p></li>
+</ul>
+</li>
+<li><p>String representation: <code class="docutils literal notranslate"><span class="pre">title</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="profiles-app">
+<h2>Profiles app<a class="headerlink" href="#profiles-app" title="Link to this heading">¶</a></h2>
+<section id="profile">
+<h3>Profile<a class="headerlink" href="#profile" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fields:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: <code class="docutils literal notranslate"><span class="pre">OneToOneField(User,</span> <span class="pre">on_delete=CASCADE)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">favorite_city</span></code>: <code class="docutils literal notranslate"><span class="pre">CharField(64,</span> <span class="pre">blank=True)</span></code></p></li>
+</ul>
+</li>
+<li><p>String representation: <code class="docutils literal notranslate"><span class="pre">username</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="pluralization-behavior-admin-and-elsewhere">
+<h2>Pluralization behavior (admin and elsewhere)<a class="headerlink" href="#pluralization-behavior-admin-and-elsewhere" title="Link to this heading">¶</a></h2>
+<p>Django normally derives plural forms from <code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> automatically (often by appending <code class="docutils literal notranslate"><span class="pre">s</span></code>). This project adjusts pluralization globally in <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/apps.py</span></code> inside <code class="docutils literal notranslate"><span class="pre">OCLettingsSiteConfig.ready</span></code> to better handle English words ending with specific letters.</p>
+<p>Rules applied at startup:</p>
+<ul class="simple">
+<li><p>If a model’s plural name is not explicitly set and the naive plural would be <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;s</span></code> then:
+- If <code class="docutils literal notranslate"><span class="pre">base</span></code> ends with <code class="docutils literal notranslate"><span class="pre">z</span></code>: use <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;zes</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">quiz</span></code> → <code class="docutils literal notranslate"><span class="pre">quizzes</span></code>)
+- If <code class="docutils literal notranslate"><span class="pre">base</span></code> ends with <code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">ch</span></code>, or <code class="docutils literal notranslate"><span class="pre">sh</span></code>: use <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;es</span></code></p></li>
+</ul>
+<p>This ensures that names like <code class="docutils literal notranslate"><span class="pre">Address</span></code> are pluralized as <code class="docutils literal notranslate"><span class="pre">Addresses</span></code> (displayed as “Addresses” in admin lists and related UI) without having to set <code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code> on each model.</p>
+<p>Refer to the implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># oc_lettings_site/apps.py (excerpt)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OCLettingsSiteConfig</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">es_endings</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;ch&#39;</span><span class="p">,</span> <span class="s1">&#39;sh&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">django_apps</span><span class="o">.</span><span class="n">get_models</span><span class="p">():</span>
+            <span class="n">opts</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">_meta</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">opts</span><span class="o">.</span><span class="n">verbose_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">verbose_name</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">base</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">plural</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">verbose_name_plural</span>
+            <span class="k">if</span> <span class="n">plural</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">plural</span><span class="p">)</span> <span class="o">==</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">base</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">):</span>
+                    <span class="n">opts</span><span class="o">.</span><span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">zes&quot;</span>
+                <span class="k">elif</span> <span class="n">base</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">es_endings</span><span class="p">):</span>
+                    <span class="n">opts</span><span class="o">.</span><span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">es&quot;</span>
+</pre></div>
+</div>
+<p>Note: You can still override plural forms per model by setting <code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> and/or <code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code> in a model’s <code class="docutils literal notranslate"><span class="pre">Meta</span></code> class if needed.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Models</a><ul>
+<li><a class="reference internal" href="#lettings-app">Lettings app</a><ul>
+<li><a class="reference internal" href="#address">Address</a></li>
+<li><a class="reference internal" href="#letting">Letting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#profiles-app">Profiles app</a><ul>
+<li><a class="reference internal" href="#profile">Profile</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pluralization-behavior-admin-and-elsewhere">Pluralization behavior (admin and elsewhere)</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="reference.html">Reference</a><ul>
+      <li>Previous: <a href="architecture.html" title="previous chapter">Orange County Lettings - Architecture</a></li>
+      <li>Next: <a href="views.html" title="next chapter">Orange County Lettings - Views</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/models.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>

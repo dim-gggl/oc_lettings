@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Views &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/views.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Orange County Lettings - Error Pages" href="error_pages.html" />
+    <link rel="prev" title="Orange County Lettings - Models" href="models.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="error_pages.html" title="Orange County Lettings - Error Pages"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Orange County Lettings - Models"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="reference.html" accesskey="U">Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Views</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-views">
+<h1>Orange County Lettings - Views<a class="headerlink" href="#orange-county-lettings-views" title="Link to this heading">¶</a></h1>
+<p>This page documents the HTTP views exposed by the project and their templates.</p>
+<section id="site-views-oc-lettings-site">
+<h2>Site views (oc_lettings_site)<a class="headerlink" href="#site-views-oc-lettings-site" title="Link to this heading">¶</a></h2>
+<section id="index">
+<h3>index<a class="headerlink" href="#index" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Path: <code class="docutils literal notranslate"><span class="pre">/</span></code></p></li>
+<li><p>Template: <code class="docutils literal notranslate"><span class="pre">index.html</span></code></p></li>
+<li><p>Purpose: render the landing page</p></li>
+</ul>
+</section>
+<section id="sentry-debug">
+<h3>sentry_debug<a class="headerlink" href="#sentry-debug" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Path: <code class="docutils literal notranslate"><span class="pre">/sentry-debug/</span></code></p></li>
+<li><p>Purpose: intentionally raise an error to test Sentry integration</p></li>
+</ul>
+</section>
+</section>
+<section id="lettings-views">
+<h2>Lettings views<a class="headerlink" href="#lettings-views" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>index<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Path: <code class="docutils literal notranslate"><span class="pre">/lettings/</span></code></p></li>
+<li><p>Template: <code class="docutils literal notranslate"><span class="pre">lettings/index.html</span></code></p></li>
+<li><p>Context: <code class="docutils literal notranslate"><span class="pre">lettings_list</span></code> (all <code class="docutils literal notranslate"><span class="pre">Letting</span></code> objects)</p></li>
+</ul>
+</section>
+<section id="letting">
+<h3>letting<a class="headerlink" href="#letting" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Path: <code class="docutils literal notranslate"><span class="pre">/lettings/&lt;letting_id&gt;/</span></code></p></li>
+<li><p>Template: <code class="docutils literal notranslate"><span class="pre">lettings/letting.html</span></code></p></li>
+<li><p>Context: <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">address</span></code></p></li>
+<li><p>Error handling: 404 when not found; logs template and DB errors with context</p></li>
+</ul>
+</section>
+</section>
+<section id="profiles-views">
+<h2>Profiles views<a class="headerlink" href="#profiles-views" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>index<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Path: <code class="docutils literal notranslate"><span class="pre">/profiles/</span></code></p></li>
+<li><p>Template: <code class="docutils literal notranslate"><span class="pre">profiles/index.html</span></code></p></li>
+<li><p>Context: <code class="docutils literal notranslate"><span class="pre">profiles_list</span></code> (all <code class="docutils literal notranslate"><span class="pre">Profile</span></code> objects)</p></li>
+</ul>
+</section>
+<section id="profile">
+<h3>profile<a class="headerlink" href="#profile" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Path: <code class="docutils literal notranslate"><span class="pre">/profiles/&lt;username&gt;/</span></code></p></li>
+<li><p>Template: <code class="docutils literal notranslate"><span class="pre">profiles/profile.html</span></code></p></li>
+<li><p>Context: <code class="docutils literal notranslate"><span class="pre">profile</span></code></p></li>
+<li><p>Error handling: 404 when not found; logs template and DB errors with context</p></li>
+</ul>
+</section>
+</section>
+<section id="logging-and-robustness">
+<h2>Logging and robustness<a class="headerlink" href="#logging-and-robustness" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Both apps log database and template errors with contextual information.</p></li>
+<li><p>404s are raised explicitly in detail views when objects are not found.</p></li>
+</ul>
+</section>
+<section id="routing-summary">
+<h2>Routing summary<a class="headerlink" href="#routing-summary" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/                      -&gt; index
+/lettings/             -&gt; lettings.index
+/lettings/&lt;id&gt;/        -&gt; lettings.letting
+/profiles/             -&gt; profiles.index
+/profiles/&lt;username&gt;/  -&gt; profiles.profile
+/sentry-debug/         -&gt; sentry_debug
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Views</a><ul>
+<li><a class="reference internal" href="#site-views-oc-lettings-site">Site views (oc_lettings_site)</a><ul>
+<li><a class="reference internal" href="#index">index</a></li>
+<li><a class="reference internal" href="#sentry-debug">sentry_debug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lettings-views">Lettings views</a><ul>
+<li><a class="reference internal" href="#id1">index</a></li>
+<li><a class="reference internal" href="#letting">letting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#profiles-views">Profiles views</a><ul>
+<li><a class="reference internal" href="#id2">index</a></li>
+<li><a class="reference internal" href="#profile">profile</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logging-and-robustness">Logging and robustness</a></li>
+<li><a class="reference internal" href="#routing-summary">Routing summary</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="reference.html">Reference</a><ul>
+      <li>Previous: <a href="models.html" title="previous chapter">Orange County Lettings - Models</a></li>
+      <li>Next: <a href="error_pages.html" title="next chapter">Orange County Lettings - Error Pages</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/views.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Sentry &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/sentry.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Orange County Lettings - CI/CD" href="ci_cd.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="reference.html" title="Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ci_cd.html" title="Orange County Lettings - CI/CD"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="deployment_ops.html" accesskey="U">Deployment &amp; Ops</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Sentry</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-sentry">
+<h1>Orange County Lettings - Sentry<a class="headerlink" href="#orange-county-lettings-sentry" title="Link to this heading">¶</a></h1>
+<p>This page explains how Sentry is integrated in the project and how exceptions are captured both from explicit errors and error pages.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Sentry is optional and enabled when the environment variable <code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code> is set.</p></li>
+<li><p>Initialization occurs in <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/settings.py</span></code> with <code class="docutils literal notranslate"><span class="pre">sentry_sdk.init</span></code> using <code class="docutils literal notranslate"><span class="pre">DjangoIntegration</span></code> and <code class="docutils literal notranslate"><span class="pre">LoggingIntegration</span></code>.</p></li>
+<li><p>In production (<code class="docutils literal notranslate"><span class="pre">ENV_MODE=prod</span></code>), error handlers may send events to Sentry.</p></li>
+</ul>
+</section>
+<section id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Environment variable: <code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code> must be set (e.g., in Render or your environment).</p></li>
+<li><p>Configuration highlights:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">send_default_pii=True</span></code> to include request context</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">traces_sample_rate=1.0</span></code> for full transaction traces (tune in production)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LoggingIntegration</span></code> captures logs (<code class="docutils literal notranslate"><span class="pre">event_level=ERROR</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DjangoIntegration</span></code> captures exceptions during requests and signals</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="triggering-an-exception-for-testing">
+<h2>Triggering an exception for testing<a class="headerlink" href="#triggering-an-exception-for-testing" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Route <code class="docutils literal notranslate"><span class="pre">/sentry-debug/</span></code> deliberately raises an exception to validate Sentry capture.</p></li>
+</ul>
+</section>
+<section id="and-500-pages">
+<h2>404 and 500 pages<a class="headerlink" href="#and-500-pages" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">custom_404</span></code>: logs a warning and, when <code class="docutils literal notranslate"><span class="pre">ENV_MODE=prod</span></code>, sends a message (<code class="docutils literal notranslate"><span class="pre">capture_message</span></code>) with level <code class="docutils literal notranslate"><span class="pre">warning</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">custom_500</span></code>: returns the 500 template; uncaught exceptions have already been captured by Sentry/Django</p></li>
+</ul>
+</section>
+<section id="views-and-try-except">
+<h2>Views and try/except<a class="headerlink" href="#views-and-try-except" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Views in <code class="docutils literal notranslate"><span class="pre">lettings</span></code> and <code class="docutils literal notranslate"><span class="pre">profiles</span></code> use <code class="docutils literal notranslate"><span class="pre">try/except</span></code> to:</p>
+<ul>
+<li><p>Log database errors with <code class="docutils literal notranslate"><span class="pre">exc_info=True</span></code></p></li>
+<li><p>Raise <code class="docutils literal notranslate"><span class="pre">Http404</span></code> for not found cases</p></li>
+<li><p>Log template errors (<code class="docutils literal notranslate"><span class="pre">TemplateDoesNotExist</span></code>, <code class="docutils literal notranslate"><span class="pre">TemplateSyntaxError</span></code>)</p></li>
+</ul>
+</li>
+<li><p>These exceptions are either handled (404) or re-raised so that Sentry can capture them when applicable.</p></li>
+</ul>
+</section>
+<section id="local-tips">
+<h2>Local tips<a class="headerlink" href="#local-tips" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">ENV_MODE=prod</span></code> and a valid <code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code> to mimic production behavior.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">/sentry-debug/</span></code> to verify that Sentry receives events from the environment.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Sentry</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#initialization">Initialization</a></li>
+<li><a class="reference internal" href="#triggering-an-exception-for-testing">Triggering an exception for testing</a></li>
+<li><a class="reference internal" href="#and-500-pages">404 and 500 pages</a></li>
+<li><a class="reference internal" href="#views-and-try-except">Views and try/except</a></li>
+<li><a class="reference internal" href="#local-tips">Local tips</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="deployment_ops.html">Deployment &amp; Ops</a><ul>
+      <li>Previous: <a href="ci_cd.html" title="previous chapter">Orange County Lettings - CI/CD</a></li>
+      <li>Next: <a href="reference.html" title="next chapter">Reference</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sentry.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>
