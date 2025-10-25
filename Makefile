@@ -58,9 +58,15 @@ test:
 	coverage run -m pytest
 	coverage report -m
 
-# Push image to Docker Hub
+# Push image to Docker Hub (multi-architecture)
 push:
-	docker buildx build --platform linux/amd64 -t $(IMAGE_NAME):$(TAG) --push .
+    # Ensure buildx builder exists (no-op if already present)
+    docker buildx create --name oc_builder --use || true
+    docker buildx inspect --bootstrap
+    docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        -t $(IMAGE_NAME):$(TAG) \
+        --push .
 
 
 # Clean local image

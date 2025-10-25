@@ -1,7 +1,8 @@
-Orange County Lettings - Models
-============================================================
+Orange County Lettings — Models
+===============================
 
-This page documents the data models used by the project and explains the pluralization behavior.
+This page documents the data models used by the project and explains the global
+pluralization behavior configured at app startup.
 
 Lettings app
 ------------
@@ -44,9 +45,12 @@ Profile
 - String representation: ``username``
 
 Pluralization behavior (admin and elsewhere)
---------------------------------------------------------------------
+-------------------------------------------
 
-Django normally derives plural forms from ``verbose_name`` automatically (often by appending ``s``). This project adjusts pluralization globally in ``oc_lettings_site/apps.py`` inside ``OCLettingsSiteConfig.ready`` to better handle English words ending with specific letters.
+Django normally derives plural forms from ``verbose_name`` automatically. This
+project adjusts pluralization globally in ``oc_lettings_site/apps.py`` inside
+``OCLettingsSiteConfig.ready`` to better handle words ending with specific
+letters.
 
 Rules applied at startup:
 
@@ -54,9 +58,11 @@ Rules applied at startup:
   - If ``base`` ends with ``z``: use ``<base>zes`` (e.g., ``quiz`` → ``quizzes``)
   - If ``base`` ends with ``s``, ``x``, ``ch``, or ``sh``: use ``<base>es``
 
-This ensures that names like ``Address`` are pluralized as ``Addresses`` (displayed as "Addresses" in admin lists and related UI) without having to set ``verbose_name_plural`` on each model.
+This ensures that names like ``Address`` are pluralized as ``Addresses`` in
+admin lists and related UI without having to set ``verbose_name_plural`` on each
+model.
 
-Refer to the implementation:
+Implementation excerpt:
 
 .. code-block:: python
 
@@ -76,4 +82,5 @@ Refer to the implementation:
                    elif base.endswith(es_endings):
                        opts.verbose_name_plural = f"{base}es"
 
-Note: You can still override plural forms per model by setting ``verbose_name`` and/or ``verbose_name_plural`` in a model's ``Meta`` class if needed.
+You can still override plural forms per model by setting ``verbose_name`` and/or
+``verbose_name_plural`` in a model's ``Meta`` class if needed.

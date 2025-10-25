@@ -12,7 +12,7 @@ Targets overview:
 - ``run-dev`` / ``run-prod``: run the image mapping port 8000 and binding the SQLite DB file
 - ``pull-run``: pull from Docker Hub then run locally
 - ``test``: run tests with coverage (outside Docker)
-- ``push``: build and push multi-arch image to Docker Hub
+- ``push``: build and push multi-arch image to Docker Hub (``linux/amd64`` and ``linux/arm64``)
 - ``clean``: remove local image
 
 Key variables:
@@ -40,16 +40,73 @@ Jobs:
    - Install dependencies
    - Run coverage with threshold (``--fail-under=80``)
 
-3) Build and push Docker image
+3) Build and push Docker image (multi-arch)
    - Needs: Tests
    - Only on ``main``
    - Login to Docker Hub
-   - Build and push tags: ``latest`` and ``<sha>``
+   - Build and push tags: ``latest`` and ``<sha>`` for platforms ``linux/amd64, linux/arm64``
 
 4) Deploy to Render
    - Needs: Build and push
    - Only on ``main``
    - Uses ``JorgeLNJunior/render-deploy`` with ``RENDER_SERVICE_ID`` and ``RENDER_API_KEY``
+
+Read the Docs documentation deployment
+--------------------------------------
+
+The documentation is built with Sphinx and deployed on Read the Docs. Builds are
+triggered automatically on every push via a GitHub → Read the Docs webhook.
+
+Project configuration
+~~~~~~~~~~~~~~~~~~~~~
+
+- The Read the Docs config lives at the repository root: ``.readthedocs.yaml``.
+  Minimal excerpt:
+
+  .. code-block:: yaml
+
+     version: 2
+     build:
+       os: ubuntu-22.04
+       tools:
+         python: "3.12"
+     sphinx:
+       configuration: docs/conf.py
+       fail_on_warning: true
+     python:
+       install:
+         - requirements: docs/requirements.txt
+
+- Sphinx configuration: ``docs/conf.py``
+- Documentation dependencies: ``docs/requirements.txt``
+
+GitHub ↔ Read the Docs integration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To enable automatic builds on push:
+
+1. On Read the Docs (project Admin):
+   - Go to ``Admin`` → ``Integrations`` → ``Add integration``.
+   - Choose ``GitHub incoming webhook`` and copy the generated ``Payload URL``.
+
+2. On GitHub (repository Settings):
+   - ``Settings`` → ``Webhooks`` → ``Add webhook``.
+   - Paste the ``Payload URL`` from Read the Docs.
+   - Content type: ``application/json``.
+   - Events: select ``Just the push event``.
+   - Save the webhook.
+
+3. Push to any branch. Read the Docs should receive the event and schedule a build
+   using ``.readthedocs.yaml`` and ``docs/conf.py``.
+
+Troubleshooting
+~~~~~~~~~~~~~~~
+
+- Ensure ``docs`` builds locally: ``sphinx-build -b html docs docs/_build/html``.
+- Check that the webhook deliveries in GitHub show ``200`` responses.
+- In Read the Docs, verify build logs and that the environment matches the YAML
+  (Ubuntu 22.04, Python 3.12) and that dependencies from ``docs/requirements.txt``
+  are installed.
 
 Required secrets:
 

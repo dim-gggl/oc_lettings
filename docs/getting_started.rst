@@ -29,6 +29,9 @@ Create and activate a virtual environment
    # On Windows PowerShell
    # .\\venv\\Scripts\\Activate.ps1
 
+.. note::
+   Always ensure the virtual environment is active before running commands.
+
 Confirm environment is active
 -----------------------------
 
@@ -90,7 +93,7 @@ Run the development server
 
    python manage.py runserver
 
-Then open ``http://localhost:8000``.
+Open ``http://localhost:8000`` in your browser.
 
 Static files
 ------------
