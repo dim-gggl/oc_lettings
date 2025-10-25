@@ -64,7 +64,7 @@ def custom_500(request):
         A rendered response for the "500.html" template with 500 status.
     """
     logger = logging.getLogger("django.request")
-    # 500 handler is called after an exception; Django/Sentry already captured it.
+    # 500 handler is called after an exception.
     # We add a concise log for correlation without re-raising.
     logger.error("500 Internal Server Error at %s", request.get_full_path())
     return render(request, "500.html", status=500)
