@@ -19,4 +19,7 @@ documentation for details.
    development
    deployment_ops
    reference
+   api
+   README
+   lumache
 

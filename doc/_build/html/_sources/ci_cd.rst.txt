@@ -58,7 +58,7 @@ Required secrets:
 - ``RENDER_SERVICE_ID``, ``RENDER_API_KEY`` (Render)
 
 Generate secrets with Clinkey (recommended)
-------------------------------------------
+--------------------------------------------
 
 - Web UI: see :doc:`clinkey`
 - CLI example to generate a strong secret for GitHub Actions or Render:
