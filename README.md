@@ -1,77 +1,97 @@
-## Résumé
+<div align="center">
 
-Site web d'Orange County Lettings
+# Orange County Lettings
 
-## Développement local
+[![CI/CD](https://img.shields.io/github/actions/workflow/status/dim-gggl/oc_lettings/ci.yml?branch=main&label=CI%20%2F%20CD)](https://github.com/dim-gggl/oc_lettings/actions)
+[![Docs](https://img.shields.io/readthedocs/oc-lettings?logo=readthedocs)](https://oc-lettings.readthedocs.io/en/latest/)
+[![Last commit](https://img.shields.io/github/last-commit/dim-gggl/oc_lettings)](https://github.com/dim-gggl/oc_lettings/commits/main)
+[![Docker pulls](https://img.shields.io/docker/pulls/dgggl88/oc_lettings?logo=docker)](https://hub.docker.com/r/dgggl88/oc_lettings)
+[![Image size](https://img.shields.io/docker/image-size/dgggl88/oc_lettings/latest?logo=docker)](https://hub.docker.com/r/dgggl88/oc_lettings)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue?logo=python)](#)
+[![Django 5.2](https://img.shields.io/badge/django-5.2-green?logo=django)](#)
+[![Pytest](https://img.shields.io/badge/pytest-8.x-0A9EDC?logo=pytest)](#)
+[![Coverage ≥80%](https://img.shields.io/badge/coverage-%3E%3D80%25-yellowgreen)](#)
+[![Render](https://img.shields.io/badge/Render-Hosted-46E3B7?logo=render)](https://oc-lettings-670x.onrender.com)
 
-### Prérequis
+</div>
 
-- Compte GitHub avec accès en lecture à ce repository
-- Git CLI
-- SQLite3 CLI
-- Interpréteur Python, version 3.6 ou supérieure
+## Overview
 
-Dans le reste de la documentation sur le développement local, il est supposé que la commande `python` de votre OS shell exécute l'interpréteur Python ci-dessus (à moins qu'un environnement virtuel ne soit activé).
+Orange County Lettings is a Django web application to browse lettings and user profiles. It is containerized with Docker, validated by automated CI, and deployed on Render. Full developer and operator documentation is published on Read the Docs.
 
-### macOS / Linux
+- Production: https://oc-lettings-670x.onrender.com
+- Docker image: https://hub.docker.com/r/dgggl88/oc_lettings
 
-#### Cloner le repository
+## Tech stack
 
-- `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+- Django 5.2, Python 3.13
+- Pytest + Coverage, Flake8
+- Docker, Docker Hub
+- GitHub Actions CI/CD
+- Render (deployment)
+- Sphinx + Read the Docs (documentation)
 
-#### Créer l'environnement virtuel
+## Documentation (condensed)
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `python -m venv venv`
-- `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
-- Activer l'environnement `source venv/bin/activate`
-- Confirmer que la commande `python` exécute l'interpréteur Python dans l'environnement virtuel
-`which python`
-- Confirmer que la version de l'interpréteur Python est la version 3.6 ou supérieure `python --version`
-- Confirmer que la commande `pip` exécute l'exécutable pip dans l'environnement virtuel, `which pip`
-- Pour désactiver l'environnement, `deactivate`
+Below is a quick map of the documentation. Each item links to the corresponding full page on Read the Docs.
 
-#### Exécuter le site
+- Start here: get context, goals, and roles — [Full page](https://oc-lettings.readthedocs.io/en/latest/start_here.html)
+- Getting started: local setup and first run — [Full page](https://oc-lettings.readthedocs.io/en/latest/getting_started.html)
+- Development: day-to-day commands and workflows — [Full page](https://oc-lettings.readthedocs.io/en/latest/development.html)
+- Configuration: environment variables and settings — [Full page](https://oc-lettings.readthedocs.io/en/latest/configuration.html)
+- Models: domain models overview — [Full page](https://oc-lettings.readthedocs.io/en/latest/models.html)
+- Views: page views and endpoints — [Full page](https://oc-lettings.readthedocs.io/en/latest/views.html)
+- API: public interface and examples — [Full page](https://oc-lettings.readthedocs.io/en/latest/api.html)
+- Tests & coverage: running tests, thresholds, reports — [Full page](https://oc-lettings.readthedocs.io/en/latest/tests_and_coverage.html)
+- Deployment ops: secrets, environments, rollout — [Full page](https://oc-lettings.readthedocs.io/en/latest/deployment_ops.html)
+- Docker: images, run, and compose tips — [Full page](https://oc-lettings.readthedocs.io/en/latest/docker.html)
+- CI/CD: pipeline, jobs, artifacts — [Full page](https://oc-lettings.readthedocs.io/en/latest/ci_cd.html)
+- Error pages: 404/500 customization — [Full page](https://oc-lettings.readthedocs.io/en/latest/error_pages.html)
+- Sentry: monitoring and tracing — [Full page](https://oc-lettings.readthedocs.io/en/latest/sentry.html)
+- Architecture: modules and data flow — [Full page](https://oc-lettings.readthedocs.io/en/latest/architecture.html)
+- Reference: commands and quick lookup — [Full page](https://oc-lettings.readthedocs.io/en/latest/reference.html)
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pip install --requirement requirements.txt`
-- `python manage.py runserver`
-- Aller sur `http://localhost:8000` dans un navigateur.
-- Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
+More at the docs index: https://oc-lettings.readthedocs.io/en/latest/
 
-#### Linting
+## Quickstart (local)
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `flake8`
+Prerequisites: Git, Python 3.13, SQLite3, Docker (optional).
 
-#### Tests unitaires
+1) Create and activate a virtual environment
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pytest`
+```bash
+python -m venv venv
+source venv/bin/activate
+```
 
-#### Base de données
+2) Install dependencies and run the server
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- Ouvrir une session shell `sqlite3`
-- Se connecter à la base de données `.open oc-lettings-site.sqlite3`
-- Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
-- Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
-- `.quit` pour quitter
+```bash
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
 
-#### Panel d'administration
+Visit http://localhost:8000.
 
-- Aller sur `http://localhost:8000/admin`
-- Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
+3) Lint, test, and coverage locally
 
-### Windows
+```bash
+flake8
+pytest -q
+coverage run -m pytest && coverage report -m
+```
 
-Utilisation de PowerShell, comme ci-dessus sauf :
+For the complete guide, see the [Development](https://oc-lettings.readthedocs.io/en/latest/development.html) and [Getting started](https://oc-lettings.readthedocs.io/en/latest/getting_started.html) pages.
 
-- Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
-- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+## CI/CD and deployment
+
+- GitHub Actions workflow: `.github/workflows/ci.yml` (lint → tests+coverage → Docker build/push → Render deploy)
+- Docker Hub image: `dgggl88/oc_lettings`
+- Render service: automatically redeployed on successful image push
+
+See the full [CI/CD documentation](https://oc-lettings.readthedocs.io/en/latest/ci_cd.html) and [Deployment ops](https://oc-lettings.readthedocs.io/en/latest/deployment_ops.html).
+
+## License
+
+If a project license is added, it will appear here along with its badge. Until then, all rights reserved.
