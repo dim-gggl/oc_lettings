@@ -1,0 +1,74 @@
+Orange County Lettings - Views
+============================================================
+
+This page documents the HTTP views exposed by the project and their templates.
+
+Site views (oc_lettings_site)
+-----------------------------
+
+index
+~~~~~
+
+- Path: ``/``
+- Template: ``index.html``
+- Purpose: render the landing page
+
+sentry_debug
+~~~~~~~~~~~~
+
+- Path: ``/sentry-debug/``
+- Purpose: intentionally raise an error to test Sentry integration
+
+Lettings views
+--------------
+
+index
+~~~~~
+
+- Path: ``/lettings/``
+- Template: ``lettings/index.html``
+- Context: ``lettings_list`` (all ``Letting`` objects)
+
+letting
+~~~~~~~
+
+- Path: ``/lettings/<letting_id>/``
+- Template: ``lettings/letting.html``
+- Context: ``title``, ``address``
+- Error handling: 404 when not found; logs template and DB errors with context
+
+Profiles views
+--------------
+
+index
+~~~~~
+
+- Path: ``/profiles/``
+- Template: ``profiles/index.html``
+- Context: ``profiles_list`` (all ``Profile`` objects)
+
+profile
+~~~~~~~
+
+- Path: ``/profiles/<username>/``
+- Template: ``profiles/profile.html``
+- Context: ``profile``
+- Error handling: 404 when not found; logs template and DB errors with context
+
+Logging and robustness
+----------------------
+
+- Both apps log database and template errors with contextual information.
+- 404s are raised explicitly in detail views when objects are not found.
+
+Routing summary
+---------------
+
+.. code-block:: text
+
+   /                      -> index
+   /lettings/             -> lettings.index
+   /lettings/<id>/        -> lettings.letting
+   /profiles/             -> profiles.index
+   /profiles/<username>/  -> profiles.profile
+   /sentry-debug/         -> sentry_debug

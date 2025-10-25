@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Docker &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/docker.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Orange County Lettings - CI/CD" href="ci_cd.html" />
+    <link rel="prev" title="Deployment &amp; Ops" href="deployment_ops.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ci_cd.html" title="Orange County Lettings - CI/CD"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="deployment_ops.html" title="Deployment &amp; Ops"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="deployment_ops.html" accesskey="U">Deployment &amp; Ops</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Docker</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-docker">
+<h1>Orange County Lettings - Docker<a class="headerlink" href="#orange-county-lettings-docker" title="Link to this heading">¶</a></h1>
+<p>This page explains how to use the published Docker image and how to build locally.</p>
+<section id="pull-the-image">
+<h2>Pull the image<a class="headerlink" href="#pull-the-image" title="Link to this heading">¶</a></h2>
+<p>The image is available on Docker Hub:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>dgggl88/oc_lettings:latest
+</pre></div>
+</div>
+</section>
+<section id="run-the-container">
+<h2>Run the container<a class="headerlink" href="#run-the-container" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">ENV_MODE</span><span class="o">=</span>prod<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="s2">&quot;your_super_strong_secret_key&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">SENTRY_DSN</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>oc_lettings<span class="w"> </span>dgggl88/oc_lettings:latest
+</pre></div>
+</div>
+<p>Then open <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code>.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>The image runs <code class="docutils literal notranslate"><span class="pre">entrypoint.sh</span></code> which applies migrations then starts Gunicorn on port 8000.</p></li>
+<li><p>Static files are collected at build time and served by WhiteNoise.</p></li>
+</ul>
+</section>
+<section id="environment-variables">
+<h2>Environment variables<a class="headerlink" href="#environment-variables" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ENV_MODE</span></code>: <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">prod</span></code> (controls debug and allowed hosts)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DJANGO_SECRET_KEY</span></code>: required in production</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code>: optional, enable Sentry reporting</p></li>
+</ul>
+</section>
+<section id="generate-django-secret-key-with-clinkey-optional">
+<h2>Generate DJANGO_SECRET_KEY with Clinkey (optional)<a class="headerlink" href="#generate-django-secret-key-with-clinkey-optional" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>clinkey-cli
+<span class="nv">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="k">$(</span>clinkey<span class="w"> </span>-t<span class="w"> </span>super_strong<span class="w"> </span>-l<span class="w"> </span><span class="m">64</span><span class="w"> </span>-s<span class="w"> </span>-<span class="w"> </span>--lower<span class="k">)</span>
+</pre></div>
+</div>
+</section>
+<section id="volume-mounting-optional">
+<h2>Volume mounting (optional)<a class="headerlink" href="#volume-mounting-optional" title="Link to this heading">¶</a></h2>
+<p>If you want to persist the SQLite database outside the container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/oc-lettings-site.sqlite3:/app/oc-lettings-site.sqlite3<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>dgggl88/oc_lettings:latest
+</pre></div>
+</div>
+</section>
+<section id="build-the-image-locally">
+<h2>Build the image locally<a class="headerlink" href="#build-the-image-locally" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>oc_lettings:local<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="run-the-locally-built-image">
+<h2>Run the locally built image<a class="headerlink" href="#run-the-locally-built-image" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>oc_lettings:local
+</pre></div>
+</div>
+</section>
+<section id="compose-example-optional">
+<h2>Compose example (optional)<a class="headerlink" href="#compose-example-optional" title="Link to this heading">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dgggl88/oc_lettings:latest</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ENV_MODE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="w">      </span><span class="nt">DJANGO_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;change-me&quot;</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Docker</a><ul>
+<li><a class="reference internal" href="#pull-the-image">Pull the image</a></li>
+<li><a class="reference internal" href="#run-the-container">Run the container</a></li>
+<li><a class="reference internal" href="#environment-variables">Environment variables</a></li>
+<li><a class="reference internal" href="#generate-django-secret-key-with-clinkey-optional">Generate DJANGO_SECRET_KEY with Clinkey (optional)</a></li>
+<li><a class="reference internal" href="#volume-mounting-optional">Volume mounting (optional)</a></li>
+<li><a class="reference internal" href="#build-the-image-locally">Build the image locally</a></li>
+<li><a class="reference internal" href="#run-the-locally-built-image">Run the locally built image</a></li>
+<li><a class="reference internal" href="#compose-example-optional">Compose example (optional)</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="deployment_ops.html">Deployment &amp; Ops</a><ul>
+      <li>Previous: <a href="deployment_ops.html" title="previous chapter">Deployment &amp; Ops</a></li>
+      <li>Next: <a href="ci_cd.html" title="next chapter">Orange County Lettings - CI/CD</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/docker.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>

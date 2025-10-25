@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Tests and Coverage &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/tests_and_coverage.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Orange County Lettings - Clinkey" href="clinkey.html" />
+    <link rel="prev" title="Development" href="development.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="clinkey.html" title="Orange County Lettings - Clinkey"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="development.html" title="Development"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="development.html" accesskey="U">Development</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Tests and Coverage</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-tests-and-coverage">
+<h1>Orange County Lettings - Tests and Coverage<a class="headerlink" href="#orange-county-lettings-tests-and-coverage" title="Link to this heading">¶</a></h1>
+<p>This page explains how to run tests and measure coverage locally.</p>
+<section id="test-stack">
+<h2>Test stack<a class="headerlink" href="#test-stack" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest</span></code>: test runner</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest-django</span></code>: Django integration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest-cov</span></code>: coverage reporting</p></li>
+</ul>
+</section>
+<section id="run-unit-tests">
+<h2>Run unit tests<a class="headerlink" href="#run-unit-tests" title="Link to this heading">¶</a></h2>
+<p>Always ensure your virtual environment is active before running commands.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+pytest<span class="w"> </span>-q
+</pre></div>
+</div>
+</section>
+<section id="run-tests-with-coverage">
+<h2>Run tests with coverage<a class="headerlink" href="#run-tests-with-coverage" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--cov<span class="o">=</span>oc_lettings_site<span class="w"> </span>--cov<span class="o">=</span>profiles<span class="w"> </span>--cov<span class="o">=</span>lettings<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+</pre></div>
+</div>
+</section>
+<section id="generate-html-coverage-report">
+<h2>Generate HTML coverage report<a class="headerlink" href="#generate-html-coverage-report" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--cov<span class="o">=</span>oc_lettings_site<span class="w"> </span>--cov<span class="o">=</span>profiles<span class="w"> </span>--cov<span class="o">=</span>lettings<span class="w"> </span>--cov-report<span class="o">=</span>html
+<span class="c1"># Open HTML report</span>
+open<span class="w"> </span>htmlcov/index.html<span class="w">  </span><span class="c1"># macOS</span>
+<span class="c1"># xdg-open htmlcov/index.html  # Linux</span>
+</pre></div>
+</div>
+</section>
+<section id="continuous-integration-tips">
+<h2>Continuous integration tips<a class="headerlink" href="#continuous-integration-tips" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--maxfail=1</span> <span class="pre">-q</span></code> locally to fail fast.</p></li>
+<li><p>Keep coverage thresholds consistent across environments if you enforce minimums.</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Make sure <code class="docutils literal notranslate"><span class="pre">DJANGO_SETTINGS_MODULE</span></code> is correctly set (see <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code>).</p></li>
+<li><p>If database errors occur, run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code> before tests.</p></li>
+<li><p>If the environment variable <code class="docutils literal notranslate"><span class="pre">ENV_MODE</span></code> influences behavior, set it to <code class="docutils literal notranslate"><span class="pre">dev</span></code> for local tests.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Tests and Coverage</a><ul>
+<li><a class="reference internal" href="#test-stack">Test stack</a></li>
+<li><a class="reference internal" href="#run-unit-tests">Run unit tests</a></li>
+<li><a class="reference internal" href="#run-tests-with-coverage">Run tests with coverage</a></li>
+<li><a class="reference internal" href="#generate-html-coverage-report">Generate HTML coverage report</a></li>
+<li><a class="reference internal" href="#continuous-integration-tips">Continuous integration tips</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="development.html">Development</a><ul>
+      <li>Previous: <a href="development.html" title="previous chapter">Development</a></li>
+      <li>Next: <a href="clinkey.html" title="next chapter">Orange County Lettings - Clinkey</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tests_and_coverage.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>

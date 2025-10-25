@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Getting Started &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/getting_started.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development" href="development.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="development.html" title="Development"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="start_here.html" accesskey="U">Start Here</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Getting Started</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-getting-started">
+<h1>Orange County Lettings - Getting Started<a class="headerlink" href="#orange-county-lettings-getting-started" title="Link to this heading">¶</a></h1>
+<p>This page explains how to set up the project locally: cloning, virtual environment, installation and dependencies.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Git CLI</p></li>
+<li><p>Python 3.13 (recommended)</p></li>
+<li><p>SQLite3 CLI</p></li>
+<li><p>Access to this repository</p></li>
+</ul>
+</section>
+<section id="clone-the-repository">
+<h2>Clone the repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>&lt;your-fork-or-repo-url&gt;
+<span class="nb">cd</span><span class="w"> </span>oc_lettings
+</pre></div>
+</div>
+</section>
+<section id="create-and-activate-a-virtual-environment">
+<h2>Create and activate a virtual environment<a class="headerlink" href="#create-and-activate-a-virtual-environment" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># macOS/Linux</span>
+<span class="c1"># On Windows PowerShell</span>
+<span class="c1"># .\\venv\\Scripts\\Activate.ps1</span>
+</pre></div>
+</div>
+</section>
+<section id="confirm-environment-is-active">
+<h2>Confirm environment is active<a class="headerlink" href="#confirm-environment-is-active" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>python
+python<span class="w"> </span>--version
+which<span class="w"> </span>pip
+</pre></div>
+</div>
+</section>
+<section id="install-dependencies">
+<h2>Install dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading">¶</a></h2>
+<p>The project uses a lockfile. Prefer installing from <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code> when using <code class="docutils literal notranslate"><span class="pre">uv</span></code>; otherwise use <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
+<ul>
+<li><p>Using uv (recommended):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>uv
+uv<span class="w"> </span>sync
+</pre></div>
+</div>
+</li>
+<li><p>Using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--requirement<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="environment-configuration">
+<h2>Environment configuration<a class="headerlink" href="#environment-configuration" title="Link to this heading">¶</a></h2>
+<p>Copy and adjust a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file if needed (see variables used in <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/settings.py</span></code>). A starter template is available as <code class="docutils literal notranslate"><span class="pre">.env.example</span></code> at the repo root.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ENV_MODE</span></code>: dev or prod</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DJANGO_SECRET_KEY</span></code>: secret key for production</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code>: optional Sentry DSN</p></li>
+</ul>
+</section>
+<section id="generate-strong-secrets-with-clinkey-optional">
+<h2>Generate strong secrets with Clinkey (optional)<a class="headerlink" href="#generate-strong-secrets-with-clinkey-optional" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Web UI: see <a class="reference internal" href="clinkey.html"><span class="doc">Orange County Lettings - Clinkey</span></a></p></li>
+<li><p>CLI example to export a strong Django secret key:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>clinkey-cli
+<span class="nv">DJANGO_SECRET_KEY</span><span class="o">=</span><span class="k">$(</span>clinkey<span class="w"> </span>-t<span class="w"> </span>super_strong<span class="w"> </span>-l<span class="w"> </span><span class="m">64</span><span class="w"> </span>-s<span class="w"> </span>-<span class="w"> </span>--lower<span class="k">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="run-database-migrations">
+<h2>Run database migrations<a class="headerlink" href="#run-database-migrations" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>migrate
+</pre></div>
+</div>
+</section>
+<section id="run-the-development-server">
+<h2>Run the development server<a class="headerlink" href="#run-the-development-server" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>runserver
+</pre></div>
+</div>
+<p>Then open <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code>.</p>
+</section>
+<section id="static-files">
+<h2>Static files<a class="headerlink" href="#static-files" title="Link to this heading">¶</a></h2>
+<p>Static assets are served from <code class="docutils literal notranslate"><span class="pre">static/</span></code> in development. In production, files are collected to <code class="docutils literal notranslate"><span class="pre">staticfiles/</span></code> and served by WhiteNoise.</p>
+</section>
+<section id="common-issues">
+<h2>Common issues<a class="headerlink" href="#common-issues" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>If the <code class="docutils literal notranslate"><span class="pre">venv</span></code> module is missing on Linux: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python3-venv</span></code></p></li>
+<li><p>Ensure the virtual environment is activated before running commands.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Getting Started</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#clone-the-repository">Clone the repository</a></li>
+<li><a class="reference internal" href="#create-and-activate-a-virtual-environment">Create and activate a virtual environment</a></li>
+<li><a class="reference internal" href="#confirm-environment-is-active">Confirm environment is active</a></li>
+<li><a class="reference internal" href="#install-dependencies">Install dependencies</a></li>
+<li><a class="reference internal" href="#environment-configuration">Environment configuration</a></li>
+<li><a class="reference internal" href="#generate-strong-secrets-with-clinkey-optional">Generate strong secrets with Clinkey (optional)</a></li>
+<li><a class="reference internal" href="#run-database-migrations">Run database migrations</a></li>
+<li><a class="reference internal" href="#run-the-development-server">Run the development server</a></li>
+<li><a class="reference internal" href="#static-files">Static files</a></li>
+<li><a class="reference internal" href="#common-issues">Common issues</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="start_here.html">Start Here</a><ul>
+      <li>Previous: <a href="configuration.html" title="previous chapter">Configuration</a></li>
+      <li>Next: <a href="development.html" title="next chapter">Development</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/getting_started.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>

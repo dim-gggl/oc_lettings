@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Orange County Lettings - Error Pages &#8212; Orange County Lettings  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
+    <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <link rel="canonical" href="/error_pages.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Orange County Lettings - Views" href="views.html" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head><body>
+  
+  
+
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="views.html" title="Orange County Lettings - Views"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="reference.html" accesskey="U">Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Error Pages</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="orange-county-lettings-error-pages">
+<h1>Orange County Lettings - Error Pages<a class="headerlink" href="#orange-county-lettings-error-pages" title="Link to this heading">¶</a></h1>
+<p>This page documents the custom error pages and how they are handled.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Custom handlers are enabled when <code class="docutils literal notranslate"><span class="pre">DEBUG=False</span></code></p></li>
+<li><p>Configured in <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/urls.py</span></code>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">handler404</span> <span class="pre">=</span> <span class="pre">&quot;oc_lettings_site.views.custom_404&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handler500</span> <span class="pre">=</span> <span class="pre">&quot;oc_lettings_site.views.custom_500&quot;</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="handlers">
+<h2>Handlers<a class="headerlink" href="#handlers" title="Link to this heading">¶</a></h2>
+<section id="custom-404">
+<h3>custom_404<a class="headerlink" href="#custom-404" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Logs a warning with request path and referer</p></li>
+<li><p>Sends a non-exception message to Sentry in production (if <code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code> set)</p></li>
+<li><p>Renders <code class="docutils literal notranslate"><span class="pre">templates/404.html</span></code> with HTTP 404 status</p></li>
+</ul>
+</section>
+<section id="custom-500">
+<h3>custom_500<a class="headerlink" href="#custom-500" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Logs an error with request path</p></li>
+<li><p>Renders <code class="docutils literal notranslate"><span class="pre">templates/500.html</span></code> with HTTP 500 status</p></li>
+</ul>
+</section>
+</section>
+<section id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Global templates are located under <code class="docutils literal notranslate"><span class="pre">templates/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">templates/404.html</span></code>: shown when a page is not found</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">templates/500.html</span></code>: shown for server errors</p></li>
+</ul>
+</section>
+<section id="local-testing-tips">
+<h2>Local testing tips<a class="headerlink" href="#local-testing-tips" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>To preview <code class="docutils literal notranslate"><span class="pre">404.html</span></code> locally: set <code class="docutils literal notranslate"><span class="pre">DEBUG=False</span></code> and request a missing route</p></li>
+<li><p>To trigger <code class="docutils literal notranslate"><span class="pre">500.html</span></code> locally: set <code class="docutils literal notranslate"><span class="pre">DEBUG=False</span></code> and visit <code class="docutils literal notranslate"><span class="pre">/sentry-debug/</span></code> (raises an error)</p></li>
+<li><p>Ensure environment variable <code class="docutils literal notranslate"><span class="pre">ENV_MODE=prod</span></code> if you want to mimic production behavior</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings - Error Pages</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#handlers">Handlers</a><ul>
+<li><a class="reference internal" href="#custom-404">custom_404</a></li>
+<li><a class="reference internal" href="#custom-500">custom_500</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#templates">Templates</a></li>
+<li><a class="reference internal" href="#local-testing-tips">Local testing tips</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation index</a><ul>
+  <li><a href="reference.html">Reference</a><ul>
+      <li>Previous: <a href="views.html" title="previous chapter">Orange County Lettings - Views</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/error_pages.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2025, Dimitri Gaggioli.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 8.2.3.
+  </div>
+  
+  </body>
+</html>
