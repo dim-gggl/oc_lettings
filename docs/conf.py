@@ -5,7 +5,7 @@
 
 import os
 import sys
-import sphinx_readable_theme
+import sphinx_wagtail_theme
 
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath('..'))
