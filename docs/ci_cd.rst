@@ -128,7 +128,7 @@ Generate secrets with Clinkey (recommended)
 Render deployment
 -----------------
 
-- Production URL: ``https://oc-lettings-670x.onrender.com``
+- Production URL: ``https://oc-lettings-x670.onrender.com``
 - Render fetches the Docker image produced by CI and redeploys the service.
 - Environment variables to set in Render:
 
