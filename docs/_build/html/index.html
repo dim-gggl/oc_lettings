@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Orange County Lettings documentation &#8212; Orange County Lettings  documentation</title>
+    <title>Orange County Lettings &#8212; Orange County Lettings  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
     <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -35,7 +35,7 @@
           <a href="start_here.html" title="Start Here"
              accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">Orange County Lettings  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Orange County Lettings documentation</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings</a></li> 
       </ul>
     </div>  
 
@@ -44,22 +44,102 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="orange-county-lettings-documentation">
-<h1>Orange County Lettings documentation<a class="headerlink" href="#orange-county-lettings-documentation" title="Link to this heading">¶</a></h1>
-<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
-<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
-documentation for details.</p>
+  <section id="orange-county-lettings">
+<h1>Orange County Lettings<a class="headerlink" href="#orange-county-lettings" title="Link to this heading">¶</a></h1>
+<p>Purpose-built Django application for listing rentals and browsing user profiles.
+This documentation guides external contributors and operators through setup,
+development, testing, and deployment.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Project type: Django 5 application</p></li>
+<li><p>Apps: <code class="docutils literal notranslate"><span class="pre">lettings</span></code>, <code class="docutils literal notranslate"><span class="pre">profiles</span></code></p></li>
+<li><p>Persistent store: SQLite (development), file-based via Docker bind mount (local runs)</p></li>
+<li><p>Static files: served by WhiteNoise in production</p></li>
+</ul>
+</section>
+<section id="audience">
+<h2>Audience<a class="headerlink" href="#audience" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Developers integrating or contributing to the codebase</p></li>
+<li><p>Operators deploying and running the service</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<p>Start with <a class="reference internal" href="start_here.html"><span class="doc">Start Here</span></a>, then follow <a class="reference internal" href="getting_started.html"><span class="doc">Orange County Lettings - Getting Started</span></a> for local setup.
+For day-to-day commands and workflows, see <a class="reference internal" href="development.html"><span class="doc">Development</span></a>.</p>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Topics</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="start_here.html">Start Here</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Orange County Lettings - Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_here.html#who-this-is-for">Who this is for</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_here.html#what-you-will-do">What you will do</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_here.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start_here.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Orange County Lettings - Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#clone-the-repository">Clone the repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#create-and-activate-a-virtual-environment">Create and activate a virtual environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#confirm-environment-is-active">Confirm environment is active</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#environment-configuration">Environment configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#generate-strong-secrets-with-clinkey-optional">Generate strong secrets with Clinkey (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-database-migrations">Run database migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-the-development-server">Run the development server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#static-files">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#common-issues">Common issues</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tests_and_coverage.html">Orange County Lettings - Tests and Coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clinkey.html">Orange County Lettings - Clinkey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#run-the-application">Run the application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#run-tests-and-coverage">Run tests and coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#linting-and-code-style">Linting and code style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#database-and-migrations">Database and migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#static-files">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#build-and-view-documentation-sphinx">Build and view documentation (Sphinx)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#additional-guides">Additional guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#how-configuration-is-loaded">How configuration is loaded</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#required-environment-variables">Required environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#using-a-env-file">Using a .env file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#generating-secrets">Generating secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#secret-key-stability-and-data-access">Secret key stability and data access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#deployment-notes">Deployment notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Orange County Lettings — Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models.html#lettings-app">Lettings app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#profiles-app">Profiles app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#pluralization-behavior-admin-and-elsewhere">Pluralization behavior (admin and elsewhere)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Orange County Lettings - Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="views.html#site-views-oc-lettings-site">Site views (oc_lettings_site)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#lettings-views">Lettings views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#profiles-views">Profiles views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#logging-and-robustness">Logging and robustness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html#routing-summary">Routing summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#modules-overview">Modules overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tests_and_coverage.html">Orange County Lettings - Tests and Coverage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests_and_coverage.html#test-stack">Test stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests_and_coverage.html#run-unit-tests">Run unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests_and_coverage.html#run-tests-with-coverage">Run tests with coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests_and_coverage.html#generate-html-coverage-report">Generate HTML coverage report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests_and_coverage.html#continuous-integration-tips">Continuous integration tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests_and_coverage.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deployment_ops.html">Deployment &amp; Ops</a><ul>
@@ -68,24 +148,66 @@ documentation for details.</p>
 <li class="toctree-l2"><a class="reference internal" href="sentry.html">Orange County Lettings - Sentry</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Orange County Lettings - Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#pull-the-image">Pull the image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#run-the-container">Run the container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#environment-variables">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#generate-django-secret-key-with-clinkey-optional">Generate DJANGO_SECRET_KEY with Clinkey (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#volume-mounting-optional">Volume mounting (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#build-the-image-locally">Build the image locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#run-the-locally-built-image">Run the locally built image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#compose-example-optional">Compose example (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ci_cd.html">Orange County Lettings - CI/CD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ci_cd.html#makefile">Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci_cd.html#github-actions">GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci_cd.html#read-the-docs-documentation-deployment">Read the Docs documentation deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci_cd.html#generate-secrets-with-clinkey-recommended">Generate secrets with Clinkey (recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci_cd.html#render-deployment">Render deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci_cd.html#local-quick-commands">Local quick commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="error_pages.html">Orange County Lettings - Error Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="error_pages.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_pages.html#handlers">Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_pages.html#templates">Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error_pages.html#local-testing-tips">Local testing tips</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sentry.html">Orange County Lettings - Sentry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sentry.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sentry.html#initialization">Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sentry.html#triggering-an-exception-for-testing">Triggering an exception for testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sentry.html#and-500-pages">404 and 500 pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sentry.html#views-and-try-except">Views and try/except</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sentry.html#local-tips">Local tips</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Orange County Lettings — Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#components">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#request-flow">Request flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#url-routing">URL routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#settings-highlights">Settings highlights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#templates-and-static-assets">Templates and static assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#data-model-brief">Data model (brief)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#logging-and-monitoring">Logging and monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#environments-and-configuration">Environments and configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#deployment">Deployment</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html">Orange County Lettings - Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html">Orange County Lettings - Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Orange County Lettings — Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">Orange County Lettings — Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="views.html">Orange County Lettings - Views</a></li>
 <li class="toctree-l2"><a class="reference internal" href="error_pages.html">Orange County Lettings - Error Pages</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="README.html">Project Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lumache.html">Lumache (Example)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lumache.html#usage">Usage</a></li>
-</ul>
-</li>
 </ul>
 </div>
+</section>
 </section>
 
 
@@ -94,7 +216,20 @@ documentation for details.</p>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Orange County Lettings</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#audience">Audience</a></li>
+<li><a class="reference internal" href="#quick-start">Quick start</a></li>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation index</a><ul>
       <li>Next: <a href="start_here.html" title="next chapter">Start Here</a></li>

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Orange County Lettings - Models &#8212; Orange County Lettings  documentation</title>
+    <title>Orange County Lettings — Models &#8212; Orange County Lettings  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
     <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Orange County Lettings - Views" href="views.html" />
-    <link rel="prev" title="Orange County Lettings - Architecture" href="architecture.html" />
+    <link rel="prev" title="Orange County Lettings - Clinkey" href="clinkey.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
@@ -34,11 +34,10 @@
           <a href="views.html" title="Orange County Lettings - Views"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="architecture.html" title="Orange County Lettings - Architecture"
+          <a href="clinkey.html" title="Orange County Lettings - Clinkey"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="reference.html" accesskey="U">Reference</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Models</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings — Models</a></li> 
       </ul>
     </div>  
 
@@ -48,8 +47,9 @@
           <div class="body" role="main">
             
   <section id="orange-county-lettings-models">
-<h1>Orange County Lettings - Models<a class="headerlink" href="#orange-county-lettings-models" title="Link to this heading">¶</a></h1>
-<p>This page documents the data models used by the project and explains the pluralization behavior.</p>
+<h1>Orange County Lettings — Models<a class="headerlink" href="#orange-county-lettings-models" title="Link to this heading">¶</a></h1>
+<p>This page documents the data models used by the project and explains the global
+pluralization behavior configured at app startup.</p>
 <section id="lettings-app">
 <h2>Lettings app<a class="headerlink" href="#lettings-app" title="Link to this heading">¶</a></h2>
 <section id="address">
@@ -98,15 +98,20 @@
 </section>
 <section id="pluralization-behavior-admin-and-elsewhere">
 <h2>Pluralization behavior (admin and elsewhere)<a class="headerlink" href="#pluralization-behavior-admin-and-elsewhere" title="Link to this heading">¶</a></h2>
-<p>Django normally derives plural forms from <code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> automatically (often by appending <code class="docutils literal notranslate"><span class="pre">s</span></code>). This project adjusts pluralization globally in <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/apps.py</span></code> inside <code class="docutils literal notranslate"><span class="pre">OCLettingsSiteConfig.ready</span></code> to better handle English words ending with specific letters.</p>
+<p>Django normally derives plural forms from <code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> automatically. This
+project adjusts pluralization globally in <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/apps.py</span></code> inside
+<code class="docutils literal notranslate"><span class="pre">OCLettingsSiteConfig.ready</span></code> to better handle words ending with specific
+letters.</p>
 <p>Rules applied at startup:</p>
 <ul class="simple">
 <li><p>If a model’s plural name is not explicitly set and the naive plural would be <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;s</span></code> then:
 - If <code class="docutils literal notranslate"><span class="pre">base</span></code> ends with <code class="docutils literal notranslate"><span class="pre">z</span></code>: use <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;zes</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">quiz</span></code> → <code class="docutils literal notranslate"><span class="pre">quizzes</span></code>)
 - If <code class="docutils literal notranslate"><span class="pre">base</span></code> ends with <code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">ch</span></code>, or <code class="docutils literal notranslate"><span class="pre">sh</span></code>: use <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;es</span></code></p></li>
 </ul>
-<p>This ensures that names like <code class="docutils literal notranslate"><span class="pre">Address</span></code> are pluralized as <code class="docutils literal notranslate"><span class="pre">Addresses</span></code> (displayed as “Addresses” in admin lists and related UI) without having to set <code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code> on each model.</p>
-<p>Refer to the implementation:</p>
+<p>This ensures that names like <code class="docutils literal notranslate"><span class="pre">Address</span></code> are pluralized as <code class="docutils literal notranslate"><span class="pre">Addresses</span></code> in
+admin lists and related UI without having to set <code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code> on each
+model.</p>
+<p>Implementation excerpt:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># oc_lettings_site/apps.py (excerpt)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">OCLettingsSiteConfig</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -124,7 +129,8 @@
                     <span class="n">opts</span><span class="o">.</span><span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">es&quot;</span>
 </pre></div>
 </div>
-<p>Note: You can still override plural forms per model by setting <code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> and/or <code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code> in a model’s <code class="docutils literal notranslate"><span class="pre">Meta</span></code> class if needed.</p>
+<p>You can still override plural forms per model by setting <code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> and/or
+<code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code> in a model’s <code class="docutils literal notranslate"><span class="pre">Meta</span></code> class if needed.</p>
 </section>
 </section>
 
@@ -138,7 +144,7 @@
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Orange County Lettings - Models</a><ul>
+<li><a class="reference internal" href="#">Orange County Lettings — Models</a><ul>
 <li><a class="reference internal" href="#lettings-app">Lettings app</a><ul>
 <li><a class="reference internal" href="#address">Address</a></li>
 <li><a class="reference internal" href="#letting">Letting</a></li>
@@ -156,10 +162,8 @@
   </div><h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation index</a><ul>
-  <li><a href="reference.html">Reference</a><ul>
-      <li>Previous: <a href="architecture.html" title="previous chapter">Orange County Lettings - Architecture</a></li>
+      <li>Previous: <a href="clinkey.html" title="previous chapter">Orange County Lettings - Clinkey</a></li>
       <li>Next: <a href="views.html" title="next chapter">Orange County Lettings - Views</a></li>
-  </ul></li>
   </ul></li>
 </ul>
   <div role="note" aria-label="source link">

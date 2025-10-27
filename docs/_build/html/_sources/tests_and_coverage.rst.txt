@@ -18,14 +18,15 @@ Always ensure your virtual environment is active before running commands.
 .. code-block:: bash
 
    source venv/bin/activate
-   pytest -q
+   pytest
 
 Run tests with coverage
 -----------------------
 
 .. code-block:: bash
 
-   pytest --cov=oc_lettings_site --cov=profiles --cov=lettings --cov-report=term-missing
+   coverage run -m pytest
+   coverage report
 
 Generate HTML coverage report
 -----------------------------

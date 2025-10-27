@@ -62,13 +62,14 @@
 <h2>Run unit tests<a class="headerlink" href="#run-unit-tests" title="Link to this heading">¶</a></h2>
 <p>Always ensure your virtual environment is active before running commands.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
-pytest<span class="w"> </span>-q
+pytest
 </pre></div>
 </div>
 </section>
 <section id="run-tests-with-coverage">
 <h2>Run tests with coverage<a class="headerlink" href="#run-tests-with-coverage" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--cov<span class="o">=</span>oc_lettings_site<span class="w"> </span>--cov<span class="o">=</span>profiles<span class="w"> </span>--cov<span class="o">=</span>lettings<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>coverage<span class="w"> </span>run<span class="w"> </span>-m<span class="w"> </span>pytest
+coverage<span class="w"> </span>report
 </pre></div>
 </div>
 </section>

@@ -48,7 +48,49 @@
             
   <section id="development">
 <h1>Development<a class="headerlink" href="#development" title="Link to this heading">¶</a></h1>
-<p>Guides for local development, testing, and tooling.</p>
+<p>Guides for local development, testing, tooling, and documentation.</p>
+<section id="run-the-application">
+<h2>Run the application<a class="headerlink" href="#run-the-application" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>runserver
+</pre></div>
+</div>
+</section>
+<section id="run-tests-and-coverage">
+<h2>Run tests and coverage<a class="headerlink" href="#run-tests-and-coverage" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>coverage<span class="w"> </span>run<span class="w"> </span>-m<span class="w"> </span>pytest
+coverage<span class="w"> </span>report<span class="w"> </span>-m
+</pre></div>
+</div>
+</section>
+<section id="linting-and-code-style">
+<h2>Linting and code style<a class="headerlink" href="#linting-and-code-style" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>flake8
+</pre></div>
+</div>
+</section>
+<section id="database-and-migrations">
+<h2>Database and migrations<a class="headerlink" href="#database-and-migrations" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
+python<span class="w"> </span>manage.py<span class="w"> </span>migrate
+</pre></div>
+</div>
+</section>
+<section id="static-files">
+<h2>Static files<a class="headerlink" href="#static-files" title="Link to this heading">¶</a></h2>
+<p>Static assets are served from <code class="docutils literal notranslate"><span class="pre">static/</span></code> in development. In production, files
+are collected to <code class="docutils literal notranslate"><span class="pre">staticfiles/</span></code> and served by WhiteNoise.</p>
+</section>
+<section id="build-and-view-documentation-sphinx">
+<h2>Build and view documentation (Sphinx)<a class="headerlink" href="#build-and-view-documentation-sphinx" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From the repository root</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>docs/requirements.txt
+sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
+<span class="c1"># Then open docs/_build/html/index.html in your browser</span>
+</pre></div>
+</div>
+</section>
+<section id="additional-guides">
+<h2>Additional guides<a class="headerlink" href="#additional-guides" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tests_and_coverage.html">Orange County Lettings - Tests and Coverage</a><ul>
@@ -70,6 +112,7 @@
 </ul>
 </div>
 </section>
+</section>
 
 
             <div class="clearer"></div>
@@ -77,7 +120,23 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Development</a><ul>
+<li><a class="reference internal" href="#run-the-application">Run the application</a></li>
+<li><a class="reference internal" href="#run-tests-and-coverage">Run tests and coverage</a></li>
+<li><a class="reference internal" href="#linting-and-code-style">Linting and code style</a></li>
+<li><a class="reference internal" href="#database-and-migrations">Database and migrations</a></li>
+<li><a class="reference internal" href="#static-files">Static files</a></li>
+<li><a class="reference internal" href="#build-and-view-documentation-sphinx">Build and view documentation (Sphinx)</a></li>
+<li><a class="reference internal" href="#additional-guides">Additional guides</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation index</a><ul>
       <li>Previous: <a href="getting_started.html" title="previous chapter">Orange County Lettings - Getting Started</a></li>

@@ -1,25 +1,51 @@
-.. Orange County Lettings documentation master file, created by
-   sphinx-quickstart on Fri Oct 24 21:44:22 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Orange County Lettings
+======================
 
-Orange County Lettings documentation
-====================================
+Purpose-built Django application for listing rentals and browsing user profiles.
+This documentation guides external contributors and operators through setup,
+development, testing, and deployment.
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+Overview
+--------
 
+- Project type: Django 5 application
+- Apps: ``lettings``, ``profiles``
+- Persistent store: SQLite (development), file-based via Docker bind mount (local runs)
+- Static files: served by WhiteNoise in production
+
+Audience
+--------
+
+- Developers integrating or contributing to the codebase
+- Operators deploying and running the service
+
+Quick start
+-----------
+
+Start with :doc:`start_here`, then follow :doc:`getting_started` for local setup.
+For day-to-day commands and workflows, see :doc:`development`.
+
+Contents
+--------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Topics
 
    start_here
+   getting_started
    development
-   deployment_ops
-   reference
+   configuration
+   models
+   views
    api
+   tests_and_coverage
+   deployment_ops
+   docker
+   ci_cd
+   error_pages
+   sentry
+   architecture
+   reference
    README
-   lumache
 

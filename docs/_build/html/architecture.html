@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Orange County Lettings - Architecture &#8212; Orange County Lettings  documentation</title>
+    <title>Orange County Lettings — Architecture &#8212; Orange County Lettings  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d7e2fa82" />
     <link rel="stylesheet" type="text/css" href="_static/readable.css?v=e058d051" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -15,8 +15,8 @@
     <link rel="canonical" href="/architecture.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Orange County Lettings - Models" href="models.html" />
-    <link rel="prev" title="Reference" href="reference.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Orange County Lettings - Error Pages" href="error_pages.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
@@ -31,14 +31,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="models.html" title="Orange County Lettings - Models"
+          <a href="reference.html" title="Reference"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="reference.html" title="Reference"
+          <a href="error_pages.html" title="Orange County Lettings - Error Pages"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="reference.html" accesskey="U">Reference</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Orange County Lettings - Architecture</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Orange County Lettings — Architecture</a></li> 
       </ul>
     </div>  
 
@@ -48,33 +47,28 @@
           <div class="body" role="main">
             
   <section id="orange-county-lettings-architecture">
-<h1>Orange County Lettings - Architecture<a class="headerlink" href="#orange-county-lettings-architecture" title="Link to this heading">¶</a></h1>
-<p>This page describes the high-level architecture of the project: Django apps, URL routing, modules and data flow.</p>
+<h1>Orange County Lettings — Architecture<a class="headerlink" href="#orange-county-lettings-architecture" title="Link to this heading">¶</a></h1>
+<p>This page describes the high-level architecture of the project: Django apps,
+URL routing, request flow, templates/static assets, configuration, and logging/monitoring.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Project package: <code class="docutils literal notranslate"><span class="pre">oc_lettings_site</span></code></p></li>
 <li><p>Applications: <code class="docutils literal notranslate"><span class="pre">lettings</span></code>, <code class="docutils literal notranslate"><span class="pre">profiles</span></code></p></li>
-<li><p>Shared templates in <code class="docutils literal notranslate"><span class="pre">templates/</span></code> and app templates in each app</p></li>
-<li><p>Static assets under <code class="docutils literal notranslate"><span class="pre">static/</span></code> served by WhiteNoise</p></li>
-<li><p>SQLite database by default (see <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/settings.py</span></code>)</p></li>
+<li><p>Templates: shared in <code class="docutils literal notranslate"><span class="pre">templates/</span></code> and app-specific under each app</p></li>
+<li><p>Static assets: <code class="docutils literal notranslate"><span class="pre">static/</span></code> served by WhiteNoise in production</p></li>
+<li><p>Database: SQLite (default). See <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/settings.py</span></code></p></li>
 </ul>
 </section>
-<section id="applications">
-<h2>Applications<a class="headerlink" href="#applications" title="Link to this heading">¶</a></h2>
+<section id="components">
+<h2>Components<a class="headerlink" href="#components" title="Link to this heading">¶</a></h2>
 <section id="oc-lettings-site">
 <h3>oc_lettings_site<a class="headerlink" href="#oc-lettings-site" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>Purpose: site-level configuration, root URLs, WSGI/ASGI, index page and error handlers.</p></li>
-<li><p>URLs:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/
-/sentry-debug/
-</pre></div>
-</div>
-</li>
-<li><p>Key modules:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">oc_lettings_site/urls.py</span></code>: includes app URLs and handlers</p></li>
+<li><p>Purpose: site-level configuration, root URLs, index page, error handlers, Sentry setup.</p></li>
+<li><p>Key modules:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">oc_lettings_site/urls.py</span></code>: includes app URLs and error handlers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">oc_lettings_site/views.py</span></code>: <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_404</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_500</span></code>, <code class="docutils literal notranslate"><span class="pre">sentry_debug</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">oc_lettings_site/apps.py</span></code>: app config and pluralization tweaks</p></li>
 </ul>
@@ -83,42 +77,32 @@
 </section>
 <section id="lettings">
 <h3>lettings<a class="headerlink" href="#lettings" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>Purpose: manage lettings (list and detail display)</p></li>
-<li><p>URLs (mounted under <code class="docutils literal notranslate"><span class="pre">/lettings/</span></code>):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/lettings/
-/lettings/&lt;letting_id&gt;/
-</pre></div>
-</div>
-</li>
-<li><p>Key modules:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lettings/urls.py</span></code>: URL patterns</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lettings/views.py</span></code>: views for index and detail</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lettings/models.py</span></code>: models including <code class="docutils literal notranslate"><span class="pre">Letting</span></code> and related address</p></li>
-</ul>
-</li>
+<li><p>Purpose: manage lettings (list and detail display)</p></li>
+<li><p>URLs (mounted under <code class="docutils literal notranslate"><span class="pre">/lettings/</span></code>): <code class="docutils literal notranslate"><span class="pre">/lettings/</span></code>, <code class="docutils literal notranslate"><span class="pre">/lettings/&lt;letting_id&gt;/</span></code></p></li>
+<li><p>Key modules: <code class="docutils literal notranslate"><span class="pre">lettings/urls.py</span></code>, <code class="docutils literal notranslate"><span class="pre">lettings/views.py</span></code>, <code class="docutils literal notranslate"><span class="pre">lettings/models.py</span></code></p></li>
 </ul>
 </section>
 <section id="profiles">
 <h3>profiles<a class="headerlink" href="#profiles" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>Purpose: manage user profiles</p></li>
-<li><p>URLs (mounted under <code class="docutils literal notranslate"><span class="pre">/profiles/</span></code>):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/profiles/
-/profiles/&lt;username&gt;/
-</pre></div>
-</div>
-</li>
-<li><p>Key modules:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">profiles/urls.py</span></code>: URL patterns</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">profiles/views.py</span></code>: views for index and profile detail</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">profiles/models.py</span></code>: <code class="docutils literal notranslate"><span class="pre">Profile</span></code> model</p></li>
-</ul>
-</li>
+<li><p>Purpose: manage user profiles</p></li>
+<li><p>URLs (mounted under <code class="docutils literal notranslate"><span class="pre">/profiles/</span></code>): <code class="docutils literal notranslate"><span class="pre">/profiles/</span></code>, <code class="docutils literal notranslate"><span class="pre">/profiles/&lt;username&gt;/</span></code></p></li>
+<li><p>Key modules: <code class="docutils literal notranslate"><span class="pre">profiles/urls.py</span></code>, <code class="docutils literal notranslate"><span class="pre">profiles/views.py</span></code>, <code class="docutils literal notranslate"><span class="pre">profiles/models.py</span></code></p></li>
 </ul>
 </section>
+</section>
+<section id="request-flow">
+<h2>Request flow<a class="headerlink" href="#request-flow" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Incoming HTTP request reaches the root URLconf (<code class="docutils literal notranslate"><span class="pre">oc_lettings_site/urls.py</span></code>)</p></li>
+<li><p>Request is routed to a view function in the target app (<code class="docutils literal notranslate"><span class="pre">lettings</span></code> or <code class="docutils literal notranslate"><span class="pre">profiles</span></code>)</p></li>
+<li><p>The view optionally fetches data via Django ORM and renders a template</p></li>
+<li><p>A rendered HTTP response is returned</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">DEBUG=False</span></code> and an error occurs:
+- 404 errors are handled by <code class="docutils literal notranslate"><span class="pre">custom_404</span></code> (logs a warning and may send a Sentry message)
+- 500 errors are handled by <code class="docutils literal notranslate"><span class="pre">custom_500</span></code> (logs an error)</p></li>
+</ol>
 </section>
 <section id="url-routing">
 <h2>URL routing<a class="headerlink" href="#url-routing" title="Link to this heading">¶</a></h2>
@@ -146,24 +130,48 @@
 <h2>Settings highlights<a class="headerlink" href="#settings-highlights" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ENV_MODE</span></code> controls <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> and <code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span></code></p></li>
-<li><p>Static files: <code class="docutils literal notranslate"><span class="pre">STATIC_URL</span></code>, <code class="docutils literal notranslate"><span class="pre">STATICFILES_DIRS</span></code>, <code class="docutils literal notranslate"><span class="pre">STATIC_ROOT</span></code></p></li>
-<li><p>Logging configured with console handlers</p></li>
-<li><p>Sentry optional via <code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code></p></li>
+<li><p>Static files: <code class="docutils literal notranslate"><span class="pre">STATIC_URL</span></code>, <code class="docutils literal notranslate"><span class="pre">STATICFILES_DIRS</span></code>, <code class="docutils literal notranslate"><span class="pre">STATIC_ROOT</span></code> (WhiteNoise in production)</p></li>
+<li><p>Logging configured with console handlers and per-module loggers</p></li>
+<li><p>Optional Sentry instrumentation via <code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code></p></li>
+</ul>
+</section>
+<section id="templates-and-static-assets">
+<h2>Templates and static assets<a class="headerlink" href="#templates-and-static-assets" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Base templates in <code class="docutils literal notranslate"><span class="pre">templates/</span></code>: <code class="docutils literal notranslate"><span class="pre">index.html</span></code>, <code class="docutils literal notranslate"><span class="pre">404.html</span></code>, <code class="docutils literal notranslate"><span class="pre">500.html</span></code>, <code class="docutils literal notranslate"><span class="pre">base.html</span></code></p></li>
+<li><p>App templates in <code class="docutils literal notranslate"><span class="pre">lettings/templates/lettings/</span></code> and <code class="docutils literal notranslate"><span class="pre">profiles/templates/profiles/</span></code></p></li>
+<li><p>Static assets in <code class="docutils literal notranslate"><span class="pre">static/</span></code> (CSS, JS, fonts, images)</p></li>
 </ul>
 </section>
 <section id="data-model-brief">
 <h2>Data model (brief)<a class="headerlink" href="#data-model-brief" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">profiles.Profile</span></code>: user profile with <code class="docutils literal notranslate"><span class="pre">favorite_city</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lettings.Address</span></code> and <code class="docutils literal notranslate"><span class="pre">lettings.Letting</span></code>: address normalized and linked to letting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lettings.Address</span></code> and <code class="docutils literal notranslate"><span class="pre">lettings.Letting</span></code>: normalized address linked One-to-One to a letting</p></li>
+<li><p>See <a class="reference internal" href="models.html"><span class="doc">Orange County Lettings — Models</span></a> for details</p></li>
 </ul>
 </section>
-<section id="templates-and-static">
-<h2>Templates and static<a class="headerlink" href="#templates-and-static" title="Link to this heading">¶</a></h2>
+<section id="logging-and-monitoring">
+<h2>Logging and monitoring<a class="headerlink" href="#logging-and-monitoring" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Base templates in <code class="docutils literal notranslate"><span class="pre">templates/</span></code>: <code class="docutils literal notranslate"><span class="pre">index.html</span></code>, <code class="docutils literal notranslate"><span class="pre">404.html</span></code>, <code class="docutils literal notranslate"><span class="pre">500.html</span></code>, <code class="docutils literal notranslate"><span class="pre">base.html</span></code></p></li>
-<li><p>App templates in <code class="docutils literal notranslate"><span class="pre">lettings/templates/lettings/</span></code> and <code class="docutils literal notranslate"><span class="pre">profiles/templates/profiles/</span></code></p></li>
-<li><p>Static assets in <code class="docutils literal notranslate"><span class="pre">static/</span></code> (CSS, JS, fonts, images)</p></li>
+<li><p>Console logging with standard formatters and per-module loggers</p></li>
+<li><p>Sentry integration (if <code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code> is provided) with Django and logging integrations</p></li>
+</ul>
+</section>
+<section id="environments-and-configuration">
+<h2>Environments and configuration<a class="headerlink" href="#environments-and-configuration" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ENV_MODE</span></code>: <code class="docutils literal notranslate"><span class="pre">dev</span></code> or <code class="docutils literal notranslate"><span class="pre">prod</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DJANGO_SECRET_KEY</span></code>: required in production</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span></code>: configured for production</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SENTRY_DSN</span></code>: optional, enables error reporting and tracing</p></li>
+</ul>
+</section>
+<section id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>The app can be containerized (see <a class="reference internal" href="docker.html"><span class="doc">Orange County Lettings - Docker</span></a>) and deployed following <a class="reference internal" href="deployment_ops.html"><span class="doc">Deployment &amp; Ops</span></a></p></li>
+<li><p>Static files are served by WhiteNoise; database is SQLite by default</p></li>
 </ul>
 </section>
 </section>
@@ -178,18 +186,22 @@
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Orange County Lettings - Architecture</a><ul>
+<li><a class="reference internal" href="#">Orange County Lettings — Architecture</a><ul>
 <li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#applications">Applications</a><ul>
+<li><a class="reference internal" href="#components">Components</a><ul>
 <li><a class="reference internal" href="#oc-lettings-site">oc_lettings_site</a></li>
 <li><a class="reference internal" href="#lettings">lettings</a></li>
 <li><a class="reference internal" href="#profiles">profiles</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#request-flow">Request flow</a></li>
 <li><a class="reference internal" href="#url-routing">URL routing</a></li>
 <li><a class="reference internal" href="#settings-highlights">Settings highlights</a></li>
+<li><a class="reference internal" href="#templates-and-static-assets">Templates and static assets</a></li>
 <li><a class="reference internal" href="#data-model-brief">Data model (brief)</a></li>
-<li><a class="reference internal" href="#templates-and-static">Templates and static</a></li>
+<li><a class="reference internal" href="#logging-and-monitoring">Logging and monitoring</a></li>
+<li><a class="reference internal" href="#environments-and-configuration">Environments and configuration</a></li>
+<li><a class="reference internal" href="#deployment">Deployment</a></li>
 </ul>
 </li>
 </ul>
@@ -197,10 +209,8 @@
   </div><h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation index</a><ul>
-  <li><a href="reference.html">Reference</a><ul>
-      <li>Previous: <a href="reference.html" title="previous chapter">Reference</a></li>
-      <li>Next: <a href="models.html" title="next chapter">Orange County Lettings - Models</a></li>
-  </ul></li>
+      <li>Previous: <a href="error_pages.html" title="previous chapter">Orange County Lettings - Error Pages</a></li>
+      <li>Next: <a href="reference.html" title="next chapter">Reference</a></li>
   </ul></li>
 </ul>
   <div role="note" aria-label="source link">

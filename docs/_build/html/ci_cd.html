@@ -58,7 +58,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">run-dev</span></code> / <code class="docutils literal notranslate"><span class="pre">run-prod</span></code>: run the image mapping port 8000 and binding the SQLite DB file</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pull-run</span></code>: pull from Docker Hub then run locally</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">test</span></code>: run tests with coverage (outside Docker)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">push</span></code>: build and push multi-arch image to Docker Hub</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">push</span></code>: build and push multi-arch image to Docker Hub (<code class="docutils literal notranslate"><span class="pre">linux/amd64</span></code> and <code class="docutils literal notranslate"><span class="pre">linux/arm64</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean</span></code>: remove local image</p></li>
 </ul>
 <p>Key variables:</p>
@@ -83,22 +83,77 @@
 - Setup Python 3.13
 - Install dependencies
 - Run coverage with threshold (<code class="docutils literal notranslate"><span class="pre">--fail-under=80</span></code>)</p></li>
-<li><p>Build and push Docker image
+<li><p>Build and push Docker image (multi-arch)
 - Needs: Tests
 - Only on <code class="docutils literal notranslate"><span class="pre">main</span></code>
 - Login to Docker Hub
-- Build and push tags: <code class="docutils literal notranslate"><span class="pre">latest</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;sha&gt;</span></code></p></li>
+- Build and push tags: <code class="docutils literal notranslate"><span class="pre">latest</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;sha&gt;</span></code> for platforms <code class="docutils literal notranslate"><span class="pre">linux/amd64,</span> <span class="pre">linux/arm64</span></code></p></li>
 <li><p>Deploy to Render
 - Needs: Build and push
 - Only on <code class="docutils literal notranslate"><span class="pre">main</span></code>
 - Uses <code class="docutils literal notranslate"><span class="pre">JorgeLNJunior/render-deploy</span></code> with <code class="docutils literal notranslate"><span class="pre">RENDER_SERVICE_ID</span></code> and <code class="docutils literal notranslate"><span class="pre">RENDER_API_KEY</span></code></p></li>
 </ol>
+</section>
+<section id="read-the-docs-documentation-deployment">
+<h2>Read the Docs documentation deployment<a class="headerlink" href="#read-the-docs-documentation-deployment" title="Link to this heading">¶</a></h2>
+<p>The documentation is built with Sphinx and deployed on Read the Docs. Builds are
+triggered automatically on every push via a GitHub → Read the Docs webhook.</p>
+<section id="project-configuration">
+<h3>Project configuration<a class="headerlink" href="#project-configuration" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p>The Read the Docs config lives at the repository root: <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code>.
+Minimal excerpt:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-22.04</span>
+<span class="w">  </span><span class="nt">tools</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">python</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.12&quot;</span>
+<span class="nt">sphinx</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/conf.py</span>
+<span class="w">  </span><span class="nt">fail_on_warning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">python</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">install</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">requirements</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/requirements.txt</span>
+</pre></div>
+</div>
+</li>
+<li><p>Sphinx configuration: <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code></p></li>
+<li><p>Documentation dependencies: <code class="docutils literal notranslate"><span class="pre">docs/requirements.txt</span></code></p></li>
+</ul>
+</section>
+<section id="github-read-the-docs-integration">
+<h3>GitHub ↔ Read the Docs integration<a class="headerlink" href="#github-read-the-docs-integration" title="Link to this heading">¶</a></h3>
+<p>To enable automatic builds on push:</p>
+<ol class="arabic simple">
+<li><p>On Read the Docs (project Admin):
+- Go to <code class="docutils literal notranslate"><span class="pre">Admin</span></code> → <code class="docutils literal notranslate"><span class="pre">Integrations</span></code> → <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">integration</span></code>.
+- Choose <code class="docutils literal notranslate"><span class="pre">GitHub</span> <span class="pre">incoming</span> <span class="pre">webhook</span></code> and copy the generated <code class="docutils literal notranslate"><span class="pre">Payload</span> <span class="pre">URL</span></code>.</p></li>
+<li><p>On GitHub (repository Settings):
+- <code class="docutils literal notranslate"><span class="pre">Settings</span></code> → <code class="docutils literal notranslate"><span class="pre">Webhooks</span></code> → <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">webhook</span></code>.
+- Paste the <code class="docutils literal notranslate"><span class="pre">Payload</span> <span class="pre">URL</span></code> from Read the Docs.
+- Content type: <code class="docutils literal notranslate"><span class="pre">application/json</span></code>.
+- Events: select <code class="docutils literal notranslate"><span class="pre">Just</span> <span class="pre">the</span> <span class="pre">push</span> <span class="pre">event</span></code>.
+- Save the webhook.</p></li>
+<li><p>Push to any branch. Read the Docs should receive the event and schedule a build
+using <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code>.</p></li>
+</ol>
+</section>
+<section id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">docs</span></code> builds locally: <code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">docs</span> <span class="pre">docs/_build/html</span></code>.</p></li>
+<li><p>Check that the webhook deliveries in GitHub show <code class="docutils literal notranslate"><span class="pre">200</span></code> responses.</p></li>
+<li><p>In Read the Docs, verify build logs and that the environment matches the YAML
+(Ubuntu 22.04, Python 3.12) and that dependencies from <code class="docutils literal notranslate"><span class="pre">docs/requirements.txt</span></code>
+are installed.</p></li>
+</ul>
 <p>Required secrets:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">DJANGO_SECRET_KEY</span></code> (tests)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">DOCKER_USERNAME</span></code>, <code class="docutils literal notranslate"><span class="pre">DOCKERHUB_TOKEN</span></code> (Docker Hub)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">RENDER_SERVICE_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">RENDER_API_KEY</span></code> (Render)</p></li>
 </ul>
+</section>
 </section>
 <section id="generate-secrets-with-clinkey-recommended">
 <h2>Generate secrets with Clinkey (recommended)<a class="headerlink" href="#generate-secrets-with-clinkey-recommended" title="Link to this heading">¶</a></h2>
@@ -154,6 +209,12 @@ make<span class="w"> </span>push
 <li><a class="reference internal" href="#">Orange County Lettings - CI/CD</a><ul>
 <li><a class="reference internal" href="#makefile">Makefile</a></li>
 <li><a class="reference internal" href="#github-actions">GitHub Actions</a></li>
+<li><a class="reference internal" href="#read-the-docs-documentation-deployment">Read the Docs documentation deployment</a><ul>
+<li><a class="reference internal" href="#project-configuration">Project configuration</a></li>
+<li><a class="reference internal" href="#github-read-the-docs-integration">GitHub ↔ Read the Docs integration</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#generate-secrets-with-clinkey-recommended">Generate secrets with Clinkey (recommended)</a></li>
 <li><a class="reference internal" href="#render-deployment">Render deployment</a></li>
 <li><a class="reference internal" href="#local-quick-commands">Local quick commands</a></li>

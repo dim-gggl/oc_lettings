@@ -15,8 +15,8 @@
     <link rel="canonical" href="/api.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Project Documentation" href="README.html" />
-    <link rel="prev" title="Orange County Lettings - Error Pages" href="error_pages.html" />
+    <link rel="next" title="Deployment &amp; Ops" href="deployment_ops.html" />
+    <link rel="prev" title="Orange County Lettings - Views" href="views.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
@@ -31,10 +31,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="README.html" title="Project Documentation"
+          <a href="deployment_ops.html" title="Deployment &amp; Ops"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="error_pages.html" title="Orange County Lettings - Error Pages"
+          <a href="views.html" title="Orange County Lettings - Views"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">API Reference</a></li> 
@@ -48,19 +48,20 @@
             
   <section id="api-reference">
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
-<p>This section documents the public Python API of the project. It is generated
-and curated for developers integrating or extending the codebase.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html">Orange County Lettings - Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html">Orange County Lettings - Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="views.html">Orange County Lettings - Views</a></li>
-<li class="toctree-l2"><a class="reference internal" href="error_pages.html">Orange County Lettings - Error Pages</a></li>
+<p>This section documents the public Python API of the project for developers who
+integrate or extend the codebase. It summarizes key modules and their primary
+entry points.</p>
+<section id="modules-overview">
+<h2>Modules overview<a class="headerlink" href="#modules-overview" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">oc_lettings_site.views</span></code>: <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_404</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_500</span></code>, <code class="docutils literal notranslate"><span class="pre">sentry_debug</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lettings.models</span></code>: <code class="docutils literal notranslate"><span class="pre">Address</span></code>, <code class="docutils literal notranslate"><span class="pre">Letting</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lettings.views</span></code>: <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">letting</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profiles.models</span></code>: <code class="docutils literal notranslate"><span class="pre">Profile</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profiles.views</span></code>: <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">profile</span></code></p></li>
 </ul>
-</li>
-</ul>
-</div>
+<p>For a deeper look at internals, see <a class="reference internal" href="reference.html"><span class="doc">Reference</span></a>.</p>
+</section>
 </section>
 
 
@@ -69,11 +70,21 @@ and curated for developers integrating or extending the codebase.</p>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">API Reference</a><ul>
+<li><a class="reference internal" href="#modules-overview">Modules overview</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation index</a><ul>
-      <li>Previous: <a href="error_pages.html" title="previous chapter">Orange County Lettings - Error Pages</a></li>
-      <li>Next: <a href="README.html" title="next chapter">Project Documentation</a></li>
+      <li>Previous: <a href="views.html" title="previous chapter">Orange County Lettings - Views</a></li>
+      <li>Next: <a href="deployment_ops.html" title="next chapter">Deployment &amp; Ops</a></li>
   </ul></li>
 </ul>
   <div role="note" aria-label="source link">
