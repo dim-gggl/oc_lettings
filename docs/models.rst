@@ -45,7 +45,6 @@ Profile
 - String representation: ``username``
 
 Pluralization behavior (admin and elsewhere)
--------------------------------------------
 
 Django normally derives plural forms from ``verbose_name`` automatically. This
 project adjusts pluralization globally in ``oc_lettings_site/apps.py`` inside

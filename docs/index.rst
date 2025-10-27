@@ -33,19 +33,9 @@ Contents
    :caption: Topics
 
    start_here
-   getting_started
    development
-   configuration
-   models
-   views
-   api
-   tests_and_coverage
    deployment_ops
-   docker
-   ci_cd
-   error_pages
-   sentry
-   architecture
    reference
+   api
    README
 
