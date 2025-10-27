@@ -38,7 +38,7 @@ html_static_path = ['_static']
 
 extensions.append("sphinx_wagtail_theme")
 html_theme = 'sphinx_wagtail_theme'
-html_theme_path = [sphinx_readable_theme.get_html_theme_path()]
+html_theme_path = [sphinx_wagtail_theme.get_html_theme_path()]
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 html_js_files = [
     ("readthedocs.js", {"defer": "defer"}),
