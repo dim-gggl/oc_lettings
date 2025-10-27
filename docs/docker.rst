@@ -1,5 +1,5 @@
 Orange County Lettings - Docker
-============================================================
+===============================
 
 This page explains how to use the published Docker image and how to build locally.
 

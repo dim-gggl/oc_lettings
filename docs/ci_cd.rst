@@ -1,5 +1,5 @@
 Orange County Lettings - CI/CD
-============================================================
+==============================
 
 This page documents the CI/CD workflow: local helpers (Makefile), GitHub Actions pipeline, and deployment to Render.
 
@@ -115,7 +115,7 @@ Required secrets:
 - ``RENDER_SERVICE_ID``, ``RENDER_API_KEY`` (Render)
 
 Generate secrets with Clinkey (recommended)
---------------------------------------------
+-------------------------------------------
 
 - Web UI: see :doc:`clinkey`
 - CLI example to generate a strong secret for GitHub Actions or Render:

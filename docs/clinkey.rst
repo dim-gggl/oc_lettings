@@ -1,5 +1,5 @@
 Orange County Lettings - Clinkey
-========================================================
+================================
 
 This page explains how to generate strong secrets and passwords using Clinkey.
 

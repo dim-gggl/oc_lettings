@@ -1,5 +1,5 @@
 Configuration
-============================================================
+=============
 
 This page explains environment configuration, the ``.env`` file, required variables, and the rationale behind keeping secrets stable.
 
