@@ -59,13 +59,13 @@ html_theme_options = dict(
 )
 
 html_theme_options = dict(
-    github_url = "https://github.com/dim-gggl/oc-lettings/docs"
+    github_url = "https://github.com/dim-gggl/oc_lettings/docs"
 )
 
 html_theme_options = dict(
     header_links = "Top 1|http://example.com/one, Top 2|http://example.com/two",
     footer_links = ",".join([
-        "On GitHub|https://github.com/dim-gggl/oc-lettings/",
+        "On GitHub|https://github.com/dim-gggl/oc_lettings/",
         "The Author|https://github.com/dim-gggl/",
         "OC Lettings Site|https://oc-lettings-x670.onrender.com/",
         "The Docker Image|https://hub.docker.com/repository/docker/dgggl88/oc_lettings/general/",
