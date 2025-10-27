@@ -36,7 +36,8 @@ html_static_path = ['_static']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'readable'
+extensions.append("sphinx_wagtail_theme")
+html_theme = 'sphinx_wagtail_theme'
 html_theme_path = [sphinx_readable_theme.get_html_theme_path()]
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 html_js_files = [
