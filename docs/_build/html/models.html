@@ -11,12 +11,12 @@
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script defer="defer" src="_static/readthedocs.js?v=14779760"></script>
+    <script defer="defer" src="_static/readthedocs.js"></script>
     <link rel="canonical" href="/models.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Orange County Lettings - Views" href="views.html" />
-    <link rel="prev" title="Orange County Lettings - Clinkey" href="clinkey.html" />
+    <link rel="prev" title="Orange County Lettings — Architecture" href="architecture.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
@@ -34,9 +34,10 @@
           <a href="views.html" title="Orange County Lettings - Views"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="clinkey.html" title="Orange County Lettings - Clinkey"
+          <a href="architecture.html" title="Orange County Lettings — Architecture"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Orange County Lettings  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="reference.html" accesskey="U">Reference</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Orange County Lettings — Models</a></li> 
       </ul>
     </div>  
@@ -94,10 +95,7 @@ pluralization behavior configured at app startup.</p>
 </li>
 <li><p>String representation: <code class="docutils literal notranslate"><span class="pre">username</span></code></p></li>
 </ul>
-</section>
-</section>
-<section id="pluralization-behavior-admin-and-elsewhere">
-<h2>Pluralization behavior (admin and elsewhere)<a class="headerlink" href="#pluralization-behavior-admin-and-elsewhere" title="Link to this heading">¶</a></h2>
+<p>Pluralization behavior (admin and elsewhere)</p>
 <p>Django normally derives plural forms from <code class="docutils literal notranslate"><span class="pre">verbose_name</span></code> automatically. This
 project adjusts pluralization globally in <code class="docutils literal notranslate"><span class="pre">oc_lettings_site/apps.py</span></code> inside
 <code class="docutils literal notranslate"><span class="pre">OCLettingsSiteConfig.ready</span></code> to better handle words ending with specific
@@ -133,6 +131,7 @@ model.</p>
 <code class="docutils literal notranslate"><span class="pre">verbose_name_plural</span></code> in a model’s <code class="docutils literal notranslate"><span class="pre">Meta</span></code> class if needed.</p>
 </section>
 </section>
+</section>
 
 
             <div class="clearer"></div>
@@ -154,7 +153,6 @@ model.</p>
 <li><a class="reference internal" href="#profile">Profile</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#pluralization-behavior-admin-and-elsewhere">Pluralization behavior (admin and elsewhere)</a></li>
 </ul>
 </li>
 </ul>
@@ -162,8 +160,10 @@ model.</p>
   </div><h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation index</a><ul>
-      <li>Previous: <a href="clinkey.html" title="previous chapter">Orange County Lettings - Clinkey</a></li>
+  <li><a href="reference.html">Reference</a><ul>
+      <li>Previous: <a href="architecture.html" title="previous chapter">Orange County Lettings — Architecture</a></li>
       <li>Next: <a href="views.html" title="next chapter">Orange County Lettings - Views</a></li>
+  </ul></li>
   </ul></li>
 </ul>
   <div role="note" aria-label="source link">

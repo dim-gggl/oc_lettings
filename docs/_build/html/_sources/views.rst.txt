@@ -1,5 +1,5 @@
 Orange County Lettings - Views
-==============================
+============================================================
 
 This page documents the HTTP views exposed by the project and their templates.
 
