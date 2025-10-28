@@ -36,6 +36,5 @@ Contents
    development
    deployment_ops
    reference
-     api
    README
 

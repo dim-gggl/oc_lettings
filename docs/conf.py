@@ -51,7 +51,7 @@ project = "Orange County Lettings"
 # These are options specifically for the Wagtail Theme.
 html_theme_options = dict(
     project_name="Orange County Lettings",
-    logo="assets/img/logo.png",
+    logo="_static/img/logo.png",
     logo_alt="Orange County Lettings Logo",
     logo_height=70,
     logo_url="/",
@@ -69,6 +69,5 @@ html_theme_options = dict(
         "OC Lettings Site|https://oc-lettings-x670.onrender.com/",
         "The Docker Image|https://hub.docker.com/repository/docker/dgggl88/oc_lettings/general/",  # noqa: E501
         "Documentation Theme|https://wagtail.org/",
-    ]),
-    prev_next_buttons_location="bottom",
+    ])
 )
