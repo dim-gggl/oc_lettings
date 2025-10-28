@@ -1,0 +1,44 @@
+{# _templates/footer.html #}
+<footer class="container-fluid bg-primary text-light">
+    <div class="container">
+        <div class="row">
+            <div class="col p-4">
+                <nav aria-label="Footer">
+                    <ul class="nav justify-content-center mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="https://github.com/dim-gggl/oc_lettings/">On GitHub</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="https://github.com/dim-gggl/">The Author</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="https://oc-lettings-x670.onrender.com/">OC Lettings Site</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="https://hub.docker.com/r/dgggl88/oc_lettings">The Docker Image</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="https://wagtail.org/">Documentation Theme</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <div class="text-center">
+                    &copy; Copyright {{ copyright }}
+                </div>
+                <div class="text-center text-white-50 font-italic mt-3">
+                    <small>
+                        Created using
+                        <a class="text-white" href="https://github.com/wagtail/sphinx_wagtail_theme" rel="nofollow" target="_blank">
+                            Sphinx Wagtail Theme {{ sphinx_wagtail_theme_version|e }}
+                        </a>
+                        and
+                        <a class="text-white" href="https://www.sphinx-doc.org/" rel="nofollow" target="_blank">
+                            Sphinx {{ sphinx_version|e }}
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

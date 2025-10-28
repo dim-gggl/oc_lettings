@@ -34,6 +34,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_static_path = ['_static']
 
 
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
@@ -56,18 +57,12 @@ html_theme_options = dict(
     logo_height=70,
     logo_url="/",
     logo_width=70,
-)
-
-html_theme_options = dict(
-    github_url="https://github.com/dim-gggl/oc_lettings/docs"
-)
-
-html_theme_options = dict(
+    github_url="https://github.com/dim-gggl/oc_lettings/docs",
     footer_links=",".join([
         "On GitHub|https://github.com/dim-gggl/oc_lettings/",
         "The Author|https://github.com/dim-gggl/",
         "OC Lettings Site|https://oc-lettings-x670.onrender.com/",
-        "The Docker Image|https://hub.docker.com/repository/docker/dgggl88/oc_lettings/general/",  # noqa: E501
+        "The Docker Image|https://hub.docker.com/r/dgggl88/oc_lettings",  # noqa: E501
         "Documentation Theme|https://wagtail.org/",
     ])
 )

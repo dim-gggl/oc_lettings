@@ -1,0 +1,22 @@
+{# _templates/header.html #}
+<header class="container-fluid bg-primary">
+    <a class="btn btn-sm btn-light skip-to-content-link" href="#main">Skip to content</a>
+    <div class="container-fluid">
+        <div class="navbar navbar-expand-lg navbar-dark font-weight-bold">
+            <a href="{{ pathto(master_doc) }}"
+                title="{{ project }}"
+                class="logo navbar-brand"
+            >
+                <img src="{{ pathto('_static/img/logo.png', 1) }}" width="70" height="70" alt="OC Lettings Logo"
+                    class="logo-img"
+                />
+                Orange County Lettings
+            </a>
+            
+            <button class="navbar-toggler btn btn-primary d-lg-none" type="button" data-toggle="collapse" data-target="#collapseSidebar" aria-expanded="false" aria-controls="collapseExample">
+                <span class="navbar-toggler-icon"></span>
+                <span class="sr-only">menu</span>
+            </button>
+        </div>
+    </div>
+</header>

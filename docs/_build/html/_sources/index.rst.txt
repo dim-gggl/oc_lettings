@@ -35,7 +35,7 @@ Contents
    start_here
    development
    deployment_ops
+   api
    reference
-     api
    README
 
