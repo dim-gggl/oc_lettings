@@ -51,8 +51,8 @@ project = "Orange County Lettings"
 # These are options specifically for the Wagtail Theme.
 html_theme_options = dict(
     project_name="Orange County Lettings",
-    logo="img/logo.png",
-    logo_alt="Orange County Lettings",
+    logo="assets/img/logo.png",
+    logo_alt="Orange County Lettings Logo",
     logo_height=70,
     logo_url="/",
     logo_width=70,
@@ -63,7 +63,6 @@ html_theme_options = dict(
 )
 
 html_theme_options = dict(
-    header_links="Top 1|http://example.com/one, Top 2|http://example.com/two",
     footer_links=",".join([
         "On GitHub|https://github.com/dim-gggl/oc_lettings/",
         "The Author|https://github.com/dim-gggl/",
