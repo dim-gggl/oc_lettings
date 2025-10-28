@@ -50,25 +50,26 @@ project = "Orange County Lettings"
 
 # These are options specifically for the Wagtail Theme.
 html_theme_options = dict(
-    project_name = "Orange County Lettings",
-    logo = "img/logo.png",
-    logo_alt = "Orange County Lettings",
-    logo_height = 70,
-    logo_url = "/",
-    logo_width = 70,
+    project_name="Orange County Lettings",
+    logo="img/logo.png",
+    logo_alt="Orange County Lettings",
+    logo_height=70,
+    logo_url="/",
+    logo_width=70,
 )
 
 html_theme_options = dict(
-    github_url = "https://github.com/dim-gggl/oc_lettings/docs"
+    github_url="https://github.com/dim-gggl/oc_lettings/docs"
 )
 
 html_theme_options = dict(
-    header_links = "Top 1|http://example.com/one, Top 2|http://example.com/two",
-    footer_links = ",".join([
+    header_links="Top 1|http://example.com/one, Top 2|http://example.com/two",
+    footer_links=",".join([
         "On GitHub|https://github.com/dim-gggl/oc_lettings/",
         "The Author|https://github.com/dim-gggl/",
         "OC Lettings Site|https://oc-lettings-x670.onrender.com/",
-        "The Docker Image|https://hub.docker.com/repository/docker/dgggl88/oc_lettings/general/",
+        "The Docker Image|https://hub.docker.com/repository/docker/dgggl88/oc_lettings/general/",  # noqa: E501
         "Documentation Theme|https://wagtail.org/",
     ]),
- )
+    prev_next_buttons_location="bottom",
+)
