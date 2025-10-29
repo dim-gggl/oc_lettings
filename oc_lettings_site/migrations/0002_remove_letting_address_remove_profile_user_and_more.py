@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
             database_operations=[
                 migrations.AlterModelTable(
                     name='Profile',
-                    table='profiles_profile', 
+                    table='profiles_profile',
                 ),
                 migrations.AlterModelTable(
                     name='Letting',

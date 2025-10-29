@@ -3,7 +3,7 @@
 # Orange County Lettings
 
 [![CI/CD](https://img.shields.io/github/actions/workflow/status/dim-gggl/oc_lettings/ci.yml?branch=main&label=CI%20%2F%20CD)](https://github.com/dim-gggl/oc_lettings/actions)
-[![Docs](https://img.shields.io/readthedocs/oc-lettings?logo=readthedocs)](https://oc-lettings.readthedocs.io/en/latest/)
+[![Docs](https://img.shields.io/readthedocs/oc-lettings?logo=readthedocs)](https://oc-lettingsdocs.readthedocs.io/latest/)
 [![Last commit](https://img.shields.io/github/last-commit/dim-gggl/oc_lettings)](https://github.com/dim-gggl/oc_lettings/commits/main)
 [![Docker pulls](https://img.shields.io/docker/pulls/dgggl88/oc_lettings?logo=docker)](https://hub.docker.com/r/dgggl88/oc_lettings)
 [![Image size](https://img.shields.io/docker/image-size/dgggl88/oc_lettings/latest?logo=docker)](https://hub.docker.com/r/dgggl88/oc_lettings)
@@ -17,10 +17,11 @@
 
 ## Overview
 
-Orange County Lettings is a Django web application to browse lettings and user profiles. It is containerized with Docker, validated by automated CI, and deployed on Render. Full developer and operator documentation is published on Read the Docs.
+Orange County Lettings is a web application to browse lettings and user profiles. It is containerized with Docker, validated by automated CI, and deployed on Render. Full developer and operator documentation is published on Read the Docs.
 
-- Production: https://oc-lettings-670x.onrender.com
-- Docker image: https://hub.docker.com/r/dgggl88/oc_lettings
+- Production: [https://oc-lettings-670x.onrender.com](https://oc-lettings-670x.onrender.com)
+- Docker image: [https://hub.docker.com/r/dgggl88/oc_lettings](https://hub.docker.com/r/dgggl88/oc_lettings)
+- Documentation: [https://oc-lettingsdocs.readthedocs.io/latest/](https://oc-lettingsdocs.readthedocs.io/latest/)
 
 ## Tech stack
 
@@ -35,23 +36,23 @@ Orange County Lettings is a Django web application to browse lettings and user p
 
 Below is a quick map of the documentation. Each item links to the corresponding full page on Read the Docs.
 
-- Start here: get context, goals, and roles — [Full page](https://oc-lettings.readthedocs.io/en/latest/start_here.html)
-- Getting started: local setup and first run — [Full page](https://oc-lettings.readthedocs.io/en/latest/getting_started.html)
-- Development: day-to-day commands and workflows — [Full page](https://oc-lettings.readthedocs.io/en/latest/development.html)
-- Configuration: environment variables and settings — [Full page](https://oc-lettings.readthedocs.io/en/latest/configuration.html)
-- Models: domain models overview — [Full page](https://oc-lettings.readthedocs.io/en/latest/models.html)
-- Views: page views and endpoints — [Full page](https://oc-lettings.readthedocs.io/en/latest/views.html)
-- API: public interface and examples — [Full page](https://oc-lettings.readthedocs.io/en/latest/api.html)
-- Tests & coverage: running tests, thresholds, reports — [Full page](https://oc-lettings.readthedocs.io/en/latest/tests_and_coverage.html)
-- Deployment ops: secrets, environments, rollout — [Full page](https://oc-lettings.readthedocs.io/en/latest/deployment_ops.html)
-- Docker: images, run, and compose tips — [Full page](https://oc-lettings.readthedocs.io/en/latest/docker.html)
-- CI/CD: pipeline, jobs, artifacts — [Full page](https://oc-lettings.readthedocs.io/en/latest/ci_cd.html)
-- Error pages: 404/500 customization — [Full page](https://oc-lettings.readthedocs.io/en/latest/error_pages.html)
-- Sentry: monitoring and tracing — [Full page](https://oc-lettings.readthedocs.io/en/latest/sentry.html)
-- Architecture: modules and data flow — [Full page](https://oc-lettings.readthedocs.io/en/latest/architecture.html)
-- Reference: commands and quick lookup — [Full page](https://oc-lettings.readthedocs.io/en/latest/reference.html)
+- Start here: get context, goals, and roles — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/start_here.html)
+- Getting started: local setup and first run — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/getting_started.html)
+- Development: day-to-day commands and workflows — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/development.html)
+- Configuration: environment variables and settings — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/configuration.html)
+- Models: domain models overview — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/models.html)
+- Views: page views and endpoints — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/views.html)
+- API: public interface and examples — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/api.html)
+- Tests & coverage: running tests, thresholds, reports — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/tests_and_coverage.html)
+- Deployment ops: secrets, environments, rollout — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/deployment_ops.html)
+- Docker: images, run, and compose tips — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/docker.html)
+- CI/CD: pipeline, jobs, artifacts — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/ci_cd.html)
+- Error pages: 404/500 customization — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/error_pages.html)
+- Sentry: monitoring and tracing — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/sentry.html)
+- Architecture: modules and data flow — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/architecture.html)
+- Reference: commands and quick lookup — [Full page](https://oc-lettingsdocs.readthedocs.io/latest/reference.html)
 
-More at the docs index: https://oc-lettings.readthedocs.io/en/latest/
+More at the docs index: https://oc-lettingsdocs.readthedocs.io/latest/
 
 ## Quickstart (local)
 
@@ -78,11 +79,11 @@ Visit http://localhost:8000.
 
 ```bash
 flake8
-pytest -q
-coverage run -m pytest && coverage report -m
+pytest
+coverage run -m pytest && coverage report
 ```
 
-For the complete guide, see the [Development](https://oc-lettings.readthedocs.io/en/latest/development.html) and [Getting started](https://oc-lettings.readthedocs.io/en/latest/getting_started.html) pages.
+For the complete guide, see the [Development](https://oc-lettingsdocs.readthedocs.io/latest/development.html) and [Getting started](https://oc-lettingsdocs.readthedocs.io/latest/getting_started.html) pages.
 
 ## CI/CD and deployment
 
@@ -90,8 +91,5 @@ For the complete guide, see the [Development](https://oc-lettings.readthedocs.io
 - Docker Hub image: `dgggl88/oc_lettings`
 - Render service: automatically redeployed on successful image push
 
-See the full [CI/CD documentation](https://oc-lettings.readthedocs.io/en/latest/ci_cd.html) and [Deployment ops](https://oc-lettings.readthedocs.io/en/latest/deployment_ops.html).
+See the full [CI/CD documentation](https://oc-lettingsdocs.readthedocs.io/latest/ci_cd.html) and [Deployment ops](https://oc-lettingsdocs.readthedocs.io/latest/deployment_ops.html).
 
-## License
-
-If a project license is added, it will appear here along with its badge. Until then, all rights reserved.

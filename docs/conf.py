@@ -33,8 +33,6 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_static_path = ['_static']
 
-
-
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
@@ -46,18 +44,15 @@ html_js_files = [
     ("readthedocs.js", {"defer": "defer"}),
 ]
 
-# This is used by Sphinx in many places, such as page title tags.
-project = "Orange County Lettings"
-
 # These are options specifically for the Wagtail Theme.
 html_theme_options = dict(
     project_name="Orange County Lettings",
-    logo="_static/img/logo.png",
+    logo="img/logo.png",
     logo_alt="Orange County Lettings Logo",
     logo_height=70,
     logo_url="/",
     logo_width=70,
-    github_url="https://github.com/dim-gggl/oc_lettings/docs",
+    github_url="https://github.com/dim-gggl/oc_lettings/",
     footer_links=",".join([
         "On GitHub|https://github.com/dim-gggl/oc_lettings/",
         "The Author|https://github.com/dim-gggl/",

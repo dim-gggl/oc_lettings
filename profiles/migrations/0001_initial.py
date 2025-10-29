@@ -2,7 +2,7 @@
 
 """
 Migration initiale ne créant pas de tables et se basant sur celle
-existante. 
+existante.
 Respectant la convention de nommage des tables de Django, les modèles
 issus d'une refactorisation seront enregistrés dans des tables renommées
 en base.
