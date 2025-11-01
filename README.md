@@ -19,7 +19,7 @@
 
 Orange County Lettings is a web application to browse lettings and user profiles. It is containerized with Docker, validated by automated CI, and deployed on Render. Full developer and operator documentation is published on Read the Docs.
 
-- Production: [https://oc-lettings-670x.onrender.com](https://oc-lettings-670x.onrender.com)
+- Production: [https://oc-lettings-x670.onrender.com](https://oc-lettings-x670.onrender.com)
 - Docker image: [https://hub.docker.com/r/dgggl88/oc_lettings](https://hub.docker.com/r/dgggl88/oc_lettings)
 - Documentation: [https://oc-lettingsdocs.readthedocs.io/latest/](https://oc-lettingsdocs.readthedocs.io/latest/)
 
