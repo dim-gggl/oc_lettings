@@ -1,5 +1,5 @@
 # Use an appropriate Python alpine base image
-FROM python:3-alpine3.22
+FROM python:alpine
 
 # Prevent Python from writing pyc files and force stdout/stderr flush (good practices)
 ENV PYTHONDONTWRITEBYTECODE=1
